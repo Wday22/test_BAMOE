@@ -1,0 +1,2513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_8383CA74-817C-409B-89A6-F4290605119B" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_861B5063-D2B1-4636-9D54-2C5CB2F51751" name="ICE Eligibilty" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_8383CA74-817C-409B-89A6-F4290605119B">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_7577603C-4CE3-4391-9DBC-2AEC6F2093C4" name="ICE Candidate Data" isCollection="true">
+    <dmn:itemComponent id="_0B051899-8948-4F9C-BB8E-B173D396E009" name="CandID" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_306D8693-F3F4-46FD-9174-C484BB6A5382" name="SYLL_CODE" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_EE3DE271-16A5-4639-BB35-D87ED430DADC" name="SYLL_SERIES" isCollection="false">
+      <dmn:typeRef>string</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_8A57BE36-962B-404C-8325-73EAB0308689" name="SYLL_GRADE" isCollection="false">
+      <dmn:typeRef>Grade Set IGCSE</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_74C59813-64D1-4A8D-8FBC-ACA7D5A12629" name="Grade Set IGCSE" isCollection="false">
+    <dmn:typeRef>string</dmn:typeRef>
+    <dmn:allowedValues kie:constraintType="enumeration" id="_FFCD62F2-04A1-4B51-AF03-1EFA9C4009C3">
+      <dmn:text>"A*", "A*A*", "A", "AA", "B", "BB", "C", "CC", "D", "DD", "E", "EE", "F", "FF", "G", "GG", "U", "UU"</dmn:text>
+    </dmn:allowedValues>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_B338D800-CF9D-4DB3-9B6B-F1346DAFCA22" name="List Candidate Input" isCollection="true">
+    <dmn:typeRef>ICE Candidate Data</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_44B1320C-2D20-4312-A181-B88030BAE0DB" name="List String" isCollection="true">
+    <dmn:typeRef>string</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_F7F9BEA6-CAEB-40EB-842C-61E5EDBC568F" name="ListOfListOfStrings" isCollection="true">
+    <dmn:typeRef>List String</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_8D2DC7A0-744C-4E3D-961D-9C610E59A869" name="ICE Grade Set" isCollection="false">
+    <dmn:typeRef>string</dmn:typeRef>
+    <dmn:allowedValues kie:constraintType="enumeration" id="_6CDE9750-8717-41E5-ADED-286FD4F8953A">
+      <dmn:text>"Distinction", "Merit", "Pass", "Fail"</dmn:text>
+    </dmn:allowedValues>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_B73290C4-CED7-464E-8620-B129673ED75B" name="G1 Outcomes" isCollection="false">
+    <dmn:typeRef>Any</dmn:typeRef>
+    <dmn:allowedValues kie:constraintType="enumeration" id="_53A2D4F4-BD96-41B2-A858-C719B6FBB470">
+      <dmn:text>true, false, "only 1 G1 passing grade"</dmn:text>
+    </dmn:allowedValues>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_9E8077C5-7DAE-4218-AC8F-86BC09AC446C" name="tData">
+    <dmn:extensionElements/>
+    <dmn:variable id="_CBC4D7A7-2D73-427E-8C40-01A3C64AB20D" name="tData" typeRef="ICE Candidate Data"/>
+  </dmn:inputData>
+  <dmn:decision id="_67A3CD4D-F060-4648-BD05-2340D7824DC3" name="CandidateValidCombination">
+    <dmn:extensionElements/>
+    <dmn:variable id="_CFC4C77F-322E-4369-9435-FE89E5C6148B" name="CandidateValidCombination" typeRef="ICE Candidate Data"/>
+    <dmn:informationRequirement id="_6AFEAF0A-A88C-44F9-80FF-E241E279921F">
+      <dmn:requiredInput href="#_9E8077C5-7DAE-4218-AC8F-86BC09AC446C"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_6B040255-E64F-46A4-AB81-8BA266974225">
+      <dmn:requiredKnowledge href="#_AB766954-F728-4D23-B91A-90D8FBE62B50"/>
+    </dmn:knowledgeRequirement>
+    <dmn:knowledgeRequirement id="_0CF77038-612F-4031-B028-1A3623F4345C">
+      <dmn:requiredKnowledge href="#_080CC3DD-4243-49DE-8908-8A3F82AD5D89"/>
+    </dmn:knowledgeRequirement>
+    <dmn:context id="_807A9037-3D22-4966-9D32-0546725EB248">
+      <dmn:contextEntry>
+        <dmn:variable id="_3BD956BB-6D15-4D00-AD26-C089A54FC199" name="data" typeRef="Any"/>
+        <dmn:literalExpression id="_E2613787-6156-424C-82D9-23C80B8EB5CB">
+          <dmn:text>dataModel()</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_B9019BF4-C64F-4D0E-B36B-DD079771E6D5" name="PassingGrades" typeRef="List Candidate Input"/>
+        <dmn:literalExpression id="_E6973628-C01F-46A1-8158-28579CF241B0">
+          <dmn:text>tData[(list contains(data.gradesList, SYLL_GRADE)) or (SYLL_GRADE = data.EntryGrade and SYLL_SERIES = data.currentSeries)]</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_996387C6-D04F-452B-B789-47B191BABB1C" name="Barred Combination Resolved" typeRef="ICE Candidate Data"/>
+        <dmn:literalExpression id="_109A2EC6-BDD6-46B6-AFC4-9EFFEDB7F55D">
+          <dmn:text>Resolve Barred Combinations(PassingGrades)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_EEC9C7FE-A3B9-4617-9D3D-EE6083FD0647">
+          <dmn:text>Barred Combination Resolved</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_AB766954-F728-4D23-B91A-90D8FBE62B50" name="dataModel">
+    <dmn:extensionElements/>
+    <dmn:variable id="_BD63A675-6A16-4298-BD1D-AC96AAACCA1D" name="dataModel"/>
+    <dmn:encapsulatedLogic id="_7C841F77-CC56-4B34-A41F-712780B4CD4F" kind="FEEL">
+      <dmn:context id="_19E6C070-22FB-40A3-A0F4-6C002F00524E">
+        <dmn:contextEntry>
+          <dmn:variable id="_95AB379E-ACEF-4D17-A7F4-0020ACC88EC0" name="currentSeries" typeRef="string"/>
+          <dmn:literalExpression id="_DFB4071E-2F30-4C97-AEE4-A4DF2DC00D62">
+            <dmn:text>"Jun-24"</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_646D8AC3-5752-4408-8A64-5482DB4AE131" name="gradesList" typeRef="List String"/>
+          <dmn:literalExpression id="_17353A0B-BB1B-4E87-A4EC-2926818C55BD">
+            <dmn:text>["A*","A","B","C","D","E","F","G", "A*A*", "AA", "BB", "CC", "DD", "EE", "FF", "GG", "A*/1", "A/2", "B/4", "C/6", "D/5", "E/6", "F/7" ]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_D2B2AA64-ED24-43A3-877B-E44500416681" name="EntryGrade" typeRef="string"/>
+          <dmn:literalExpression id="_81714E46-473B-41EF-AFD6-F9F9281E14D6">
+            <dmn:text>"X"</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_D7477214-33BF-49B8-BCC9-826AC39CB1C2" name="G1SyllCodes" typeRef="List String"/>
+          <dmn:literalExpression id="_02E3D082-E86C-4EE0-B545-1627BDDC1999">
+            <dmn:text>["0500", "0510", "0520", "0530", "0549", "0262", "0472", "0499", "0501", "0502", "0504", "0505", "0508", "0509", "0511", "0513", "0518", "0523", "0524", "0525", "0535", "0538", "0539", "0544", "0546", "0547", "0696", "3204", "3205", "3226", "3247", "3248", "0531", "0548", "3158"]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_DDC2E603-D317-48AE-B205-970095BDD659" name="G2SyllCodes" typeRef="List String"/>
+          <dmn:literalExpression id="_76422C93-9564-4618-92D0-56EB7F63747A">
+            <dmn:text>["0408", "0409", "0427", "0448", "0455", "0457", "0460", "0470", "0475", "0480", "0488", "0493", "0495", "0680", "2035", "2047", "2068", "0490", "1664", "2020", "2055", "2059"] </dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_88D3EA8A-C2C5-4FA1-A187-FCED33F9B66B" name="G3SyllCodes" typeRef="List String"/>
+          <dmn:literalExpression id="_942D2D6E-C7C9-42E2-8A3D-C45B2F897492">
+            <dmn:text>["0610", "0620", "0625", "0653", "0654", "0680", "0697", "0600", "0652"]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_2EB127D6-6A05-4741-9CCE-C66B3C0FEFD3" name="G4SyllCodes" typeRef="List String"/>
+          <dmn:literalExpression id="_541D774E-B42C-4FB3-8274-F7B0B68FDB13">
+            <dmn:text>["0580", "0606", "0607", "0444", "4040"]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_78621009-C876-4AFC-BECA-045844A78A49" name="G5SyllCodes" typeRef="List String"/>
+          <dmn:literalExpression id="_EC8EF68C-31F1-4EC0-89D9-DAAF1F9D6329">
+            <dmn:text>["0400", "0417", "0450", "0452", "0457", "0478", "0410", "0411", "0413", "0445", "0454", "0471", "0648", "6130", "7100"]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_DBFB1E6A-2BA3-4F95-A2E2-867730A65526" name="IGCSE" typeRef="List String"/>
+          <dmn:literalExpression id="_DE892D49-1291-4FA3-8E3C-82ECCC341D75">
+            <dmn:text>["0500", "0510", "0520", "0530", "0549", "0262", "0472", "0499", "0501", "0502", "0504", "0505", "0508", "0509", "0511", "0513", "0518", "0523", "0524", "0525", "0535", "0538", "0539", "0544", "0546", "0547", "0696", "3204", "3205", "3226", "3247", "3248", "0531", "0548", "0408", "0409", "0427", "0448", "0455", "0457", "0460", "0470", "0475", "0480", "0488", "0493", "0495", "0680", "0490", "0610", "0620", "0625", "0653", "0654", "0680", "0697", "0600", "0652", "0580", "0606", "0607", "0444", "0400", "0417", "0450", "0452", "0457", "0478", "0410", "0411", "0413", "0445", "0454", "0471", "0648"]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_3763DDDE-162D-4B35-ACE3-2B2B74BEA718" name="OLevel" typeRef="List String"/>
+          <dmn:literalExpression id="_CC90C112-35AE-459F-841E-6CDA4B0F9FFC">
+            <dmn:text>["3158", "2020", "2035", "2047", "2055", "2059", "2068", "4040", "6130", "7100"]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_19246640-D2CE-417C-81DD-1AF0374D9342" name="concatenatedGroups" typeRef="List String"/>
+          <dmn:literalExpression id="_5A462808-4724-4102-A6FA-02CC98B21C17">
+            <dmn:text>concatenate(G1SyllCodes,G2SyllCodes,G3SyllCodes,G4SyllCodes,G5SyllCodes)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_D2AB0A53-3B45-459D-851C-5DADF02FF174" name="MultiGroupSyll" typeRef="List String"/>
+          <dmn:literalExpression id="_E5972440-C658-4CFC-9DE1-ED18C1910AC9">
+            <dmn:text>union(concatenatedGroups[count(index of(concatenatedGroups, item )) &gt;= 2])</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_E93F239B-F4A4-4E14-9295-6EFD79E1E271" name="G3MG" typeRef="string"/>
+          <dmn:literalExpression id="_974A578E-9DA5-4FD8-8BF9-01B2A12EF34B">
+            <dmn:text>MultiGroupSyll[item in G3SyllCodes]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_F3DCC2D9-DC82-4667-988E-D5A0F3FE2972" name="G5MG" typeRef="string"/>
+          <dmn:literalExpression id="_DF417595-BB26-40E8-AE65-481C1972519D">
+            <dmn:text>MultiGroupSyll[item in G5SyllCodes]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_13721839-CCA3-41AF-9B40-000B421C2C65" name="BarredCombinations" typeRef="ListOfListOfStrings"/>
+          <dmn:literalExpression id="_0975FE5A-5EB7-430A-A582-3ED81B6326AB">
+            <dmn:text>[["0408", "0427"], ["0408", "0475"], ["0408", "0488"], ["0409", "0470"], ["0427", "0408"], ["0427", "0475"], ["0444", "0607"], ["0448", "2059"], ["0470", "0409"], ["0472", "0500"], ["0472", "0510"], ["0472", "0511"], ["0472", "0524"], ["0475", "0408"], ["0475", "0427"], ["0488", "0408"], ["0493", "2068"], ["0500", "0472"], ["0500", "0510"], ["0500", "0511"], ["0500", "0524"], ["0501", "0520"], ["0502", "0530"], ["0505", "0525"], ["0508", "0544"], ["0509", "0523"], ["0509", "0547"], ["0510", "0472"], ["0510", "0500"], ["0510", "0511"], ["0510", "0524"], ["0511", "0472"], ["0511", "0500"], ["0511", "0510"], ["0511", "0524"], ["0520", "0501"], ["0523", "0509"], ["0523", "0547"], ["0524", "0472"], ["0524", "0500"], ["0524", "0510"], ["0524", "0511"], ["0525", "0505"], ["0530", "0502"], ["0539", "3247"], ["0539", "3248"], ["0544", "0508"], ["0546", "0696"], ["0547", "0509"], ["0547", "0523"], ["0580", "0607"], ["0607", "0444"], ["0607", "0580"], ["0610", "0653"], ["0610", "0654"], ["0620", "0652"], ["0620", "0653"], ["0620", "0654"], ["0625", "0652"], ["0625", "0653"], ["0625", "0654"], ["0653", "0610"], ["0653", "0620"], ["0653", "0625"], ["0653", "0652"], ["0653", "0654"], ["0654", "0610"], ["0654", "0620"], ["0654", "0625"], ["0654", "0652"], ["0654", "0653"], ["0696", "0546"], ["2035", "0490"], ["2035", "2048"], ["2059", "0448"], 
+["2068", "0490"], ["2068", "0493"], ["3205", "3226"], ["3226", "3205"], ["3247", "0539"], ["3247", "3248"], ["3248", "0539"], ["3248", "3247"], ["0652", "0620"], ["0652", "0625"], ["0652", "0653"], ["0652", "0654"], ["0490", "2035"], ["2048", "2035"], ["0490", "2068"]]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_B9AC845E-E34F-424A-9118-1D66AEBEEFA0" name="Series Chronology" typeRef="List String"/>
+          <dmn:literalExpression id="_D21A5810-3C47-4C2C-800A-B3CC69CE8C90">
+            <dmn:text>["Jun-24", "Nov-23", "Jun-23", "Nov-22", "Jun-22"]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_7F31961A-8B81-4569-B76E-5340604EF658">
+            <dmn:text>{"currentSeries":currentSeries, "gradesList":gradesList, "EntryGrade":EntryGrade, "G1SyllCodes":G1SyllCodes, "G2SyllCodes":G2SyllCodes, "G3SyllCodes":G3SyllCodes,"G4SyllCodes":G4SyllCodes,"G5SyllCodes":G5SyllCodes,"IGCSE":IGCSE, "OLevel": OLevel, "BarredCombinations":BarredCombinations, "MultiGroupSyll":MultiGroupSyll, "Series Chronology":Series Chronology,"G3MG":G3MG, "G5MG":G5MG}</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:businessKnowledgeModel id="_080CC3DD-4243-49DE-8908-8A3F82AD5D89" name="Resolve Barred Combinations">
+    <dmn:extensionElements/>
+    <dmn:variable id="_610BFC23-9135-4068-8AA7-475962B3285B" name="Resolve Barred Combinations" typeRef="Any"/>
+    <dmn:encapsulatedLogic id="_E1273B16-C383-4A0F-916D-028E7364606A" kind="FEEL">
+      <dmn:formalParameter id="_DDA84271-8287-4C95-A531-F6828014D0D5" name="candInput" typeRef="ICE Candidate Data"/>
+      <dmn:context id="_42F87466-2F67-4BCD-BF32-9D1B82A1032E">
+        <dmn:contextEntry>
+          <dmn:variable id="_58AD0951-09A7-4969-993B-E282611EF341" name="data" typeRef="Any"/>
+          <dmn:literalExpression id="_FA53EE4F-0EF0-4E24-A0B4-22B04DB02F9A">
+            <dmn:text>dataModel()</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_56511682-7E34-4A9E-B5E9-BE2420FC0BCE" name="allSyllCodesInInput" typeRef="List String"/>
+          <dmn:literalExpression id="_40DE83BD-1FD6-49FA-AEC8-610714D43BD0">
+            <dmn:text>candInput.SYLL_CODE</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_E7DFCCB8-DF9A-4756-918F-0400CC36CE0F" name="filteredBarred" typeRef="ICE Candidate Data"/>
+          <dmn:context id="_EEB0AA0B-A1AB-492F-BE64-E68077184404">
+            <dmn:contextEntry>
+              <dmn:variable id="_EF3F5F12-2EBA-425F-808D-73F743713387" name="barredSyllCodesInInput" typeRef="ICE Candidate Data"/>
+              <dmn:literalExpression id="_B1CE66BB-F2D1-4FA7-A5A8-D0D1634283D9">
+                <dmn:description>returns any barred combinations within cand input</dmn:description>
+                <dmn:text>for x in data.BarredCombinations return if (list contains(candInput.SYLL_CODE, x[1]) and list contains(candInput.SYLL_CODE,x[2])) then x else null</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:variable id="_ACE7AB31-CB66-495D-80D5-C48D13B494F0" name="nonBarredCombinations" typeRef="ICE Candidate Data"/>
+              <dmn:literalExpression id="_B5FACB36-6C76-4BD6-866D-3F95D2DD0DB4">
+                <dmn:text>for x in candInput return if list contains(distinct values(flatten(barredSyllCodesInInput[item != null])), x.SYLL_CODE) then null else x</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:variable id="_98575ADC-229B-4CC6-A32F-FB966989D6E9" name="sortedInput" typeRef="ICE Candidate Data"/>
+              <dmn:literalExpression id="_130A3C1A-E61B-4D15-8733-F18FCA04B5B8">
+                <dmn:description>sorts by grade . i.e. A then B  etc.</dmn:description>
+                <dmn:text>sort(candInput,function(x,y) x.SYLL_GRADE &lt; y.SYLL_GRADE)</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:variable id="_7AC22187-B731-4CF3-BD13-2C48187655E0" name="sortedInputSyll" typeRef="ICE Candidate Data"/>
+              <dmn:literalExpression id="_321D1D31-0D21-42D3-BBA5-E2C2F936C26B">
+                <dmn:description>reduced to just syll codes </dmn:description>
+                <dmn:text>sortedInput.SYLL_CODE</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:variable id="_B557F150-B56D-4A09-AE37-13D347672318" name="Syll to Retain" typeRef="List String"/>
+              <dmn:literalExpression id="_DBF41522-61DF-42DE-8661-CCC753709F7E">
+                <dmn:text>distinct values(for barredSet in barredSyllCodesInInput[item != null] return if index of(sortedInputSyll, barredSet[1])[1] &gt;= index of(sortedInputSyll, barredSet[2])[1] then barredSet[2] else barredSet[1])</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:variable id="_12DB0577-FD7F-40FB-A19A-F558D71C14B0" name="barredCombRemoved" typeRef="ICE Candidate Data"/>
+              <dmn:literalExpression id="_BFA36313-98C7-4E97-B59E-E233FFCC975D">
+                <dmn:text>if count(Syll to Retain) = 0 then sortedInput else append(sortedInput[item.SYLL_CODE in Syll to Retain],nonBarredCombinations[item != null])</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:literalExpression id="_B3109E21-F79C-4F18-8C9A-3F15DEDEB15C">
+                <dmn:description>returns non barred syll</dmn:description>
+                <dmn:text>barredCombRemoved</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+          </dmn:context>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_0C05395D-D65E-4D39-9C93-CB61947F0A1D" name="Resolved Output" typeRef="ICE Candidate Data"/>
+          <dmn:literalExpression id="_1A3EDDDE-3271-4C4D-82C9-AB014C86BA12">
+            <dmn:text>flatten(filteredBarred)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_F152F495-41D2-47FC-B7DB-5E3DAA836399" name="BarredCombination" typeRef="ListOfListOfStrings"/>
+          <dmn:literalExpression id="_6C9DF3B7-B9FF-41CD-893E-FE142405801E">
+            <dmn:text>for x in data.BarredCombinations return if (list contains(Resolved Output.SYLL_CODE, x[1]) and list contains(Resolved Output.SYLL_CODE, x[2])) then x else null</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_9101E6A1-DE61-4780-8F81-4832F79BEEE9" name="BarredCount" typeRef="number"/>
+          <dmn:literalExpression id="_22BC17F5-03F7-4A48-88AE-833ED9953A59">
+            <dmn:text>count(flatten(BarredCombination[item != null]))</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_F7A0BBAF-2B8E-4B1F-BDBD-973F17842558" name="BarredOutput" typeRef="Any"/>
+          <dmn:literalExpression id="_0A152DF3-A72F-4FC3-B6B7-D713988CFE8B">
+            <dmn:text>if BarredCount = 0 then  Resolved Output else Resolve Barred Combinations(Resolved Output)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_756B5763-FBFC-44DF-B422-25BD45914D51" name="Resits" typeRef="Any"/>
+          <dmn:context id="_DFEE2382-8469-4BE8-BE0C-0E1A9F3F4829">
+            <dmn:contextEntry>
+              <dmn:variable id="_D285F9D7-422F-4557-8018-9C8E093A3745" name="allSyllCodes" typeRef="List String"/>
+              <dmn:literalExpression id="_1CE8D94E-505F-4C55-A9AB-2CE7D0CA99A1">
+                <dmn:text>BarredOutput</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:variable id="_4DFE0267-37DF-4084-8083-C4ACAEFB24BB" name="SortedCandData" typeRef="ICE Candidate Data"/>
+              <dmn:literalExpression id="_4F644951-3DD9-4579-91DB-486F5315827D">
+                <dmn:text>sort(BarredOutput,function(x, y) (index of(data.Series Chronology, x.SYLL_SERIES)) &gt; (index of(data.Series Chronology, y.SYLL_SERIES)))</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:variable id="_169FFB82-D8CD-4EDA-9A3D-31697C000B05" name="FilterSameSyllCode" typeRef="Any"/>
+              <dmn:literalExpression id="_DE65A6A9-F923-4BC1-A434-6BC46FDE9D83">
+                <dmn:text>for syllCode in distinct values(SortedCandData.SYLL_CODE) 
+return if count(allSyllCodes, syllCode) &gt; 1 
+then SortedCandData[item.SYLL_CODE = syllCode][1] 
+else SortedCandData[item.SYLL_CODE = syllCode]</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:literalExpression id="_AD318B1E-8859-40AD-9D60-AB78D7817E30">
+                <dmn:text>FilterSameSyllCode</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+          </dmn:context>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_E41B2FEC-6326-4090-95F7-989B8C8852C7">
+            <dmn:text>Resits</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:knowledgeRequirement id="_3032187D-DE17-4A8F-9778-CAC9D12B4C2F">
+      <dmn:requiredKnowledge href="#_AB766954-F728-4D23-B91A-90D8FBE62B50"/>
+    </dmn:knowledgeRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_09ED9FD2-1CDD-44F6-B0AD-341729921BA8" name="Credit Count">
+    <dmn:extensionElements/>
+    <dmn:variable id="_4C659BDE-DE96-4C17-8AE3-AFA7F0C50464" name="Credit Count" typeRef="Any"/>
+    <dmn:informationRequirement id="_9049905E-ACC4-4779-938A-677CE5443EAA">
+      <dmn:requiredDecision href="#_67A3CD4D-F060-4648-BD05-2340D7824DC3"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_097DE8B2-E43B-48E2-A9C6-D6DF473F6E5E">
+      <dmn:requiredKnowledge href="#_AB766954-F728-4D23-B91A-90D8FBE62B50"/>
+    </dmn:knowledgeRequirement>
+    <dmn:context id="_83505918-E931-4F6A-B93A-964FA5E60413">
+      <dmn:contextEntry>
+        <dmn:variable id="_EEE663CD-46ED-4A12-9CF6-1F4ECED3FCDA" name="data" typeRef="Any"/>
+        <dmn:literalExpression id="_D6ACAAEF-6A55-43DC-93EF-39A888343ABE">
+          <dmn:text>dataModel()</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_F4734C54-1C7C-4830-97ED-3F95F53E0B57" name="CountPassingSyll" typeRef="number"/>
+        <dmn:literalExpression id="_C405C4AA-AB3F-4690-94AA-A08FDD531D25">
+          <dmn:text>count(CandidateValidCombination)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_2074F0F4-F5D3-43F6-B20D-89A3966FA173" name="OLevelCount" typeRef="number"/>
+        <dmn:context id="_D07DAB12-42ED-41E7-85A5-217D0059A4AC">
+          <dmn:contextEntry>
+            <dmn:variable id="_6A6287CC-9912-4F7E-A56E-93D2354F4DDB" name="OLSyllCodes" typeRef="List String"/>
+            <dmn:literalExpression id="_C1E72BA5-E495-4EB3-AD8A-3FB0E876BCD2">
+              <dmn:description>Checks combo for any syll that match g2 </dmn:description>
+              <dmn:text>for x in data.OLevel return if list contains(CandidateValidCombination, x) then null else x </dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_85281A6D-FD2A-4356-9F87-C0739DAD497E" name="OLlist" typeRef="List Candidate Input"/>
+            <dmn:literalExpression id="_3C989681-6D29-45AA-AA98-08D1099EDA8B">
+              <dmn:text>CandidateValidCombination[list contains(OLSyllCodes[item != null],SYLL_CODE )]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:literalExpression id="_208764FC-00AC-48D9-A6AE-3C37C1287CEC">
+              <dmn:text>count(OLlist)</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_6FE4C302-4BC1-4A6F-9C05-4580EAD6557C" name="IGCSECount" typeRef="number"/>
+        <dmn:context id="_0F8A6190-B700-44A3-885A-6E983149B73D">
+          <dmn:contextEntry>
+            <dmn:variable id="_49FB4DA2-C389-4416-847E-D2E92F3FBEEC" name="IGCSESyllCodes" typeRef="List String"/>
+            <dmn:literalExpression id="_D0227DBC-77F0-43F1-84D7-5196488F046C">
+              <dmn:text>for x in data.IGCSE return if list contains(CandidateValidCombination, x) then null else x </dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_8A5EA9BF-B0EF-4797-8905-C6F1AD52ECD8" name="IGCSEList" typeRef="ICE Candidate Data"/>
+            <dmn:literalExpression id="_FD0CEBC6-8A4F-4A90-B649-2037834E0E61">
+              <dmn:text>CandidateValidCombination[list contains(IGCSESyllCodes[item != null],SYLL_CODE )]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_86D0A896-6A02-437C-AC77-E8D523EF2D02" name="DoubleScienceCredit" typeRef="number"/>
+            <dmn:literalExpression id="_968FF4B5-F493-4968-B9D8-5B074C50DFFF">
+              <dmn:text>if list contains(IGCSEList.SYLL_CODE,"0654") then sum(count(IGCSEList) + 1) else count(IGCSEList)</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:literalExpression id="_8AF339BF-6CFC-45EE-B5B4-DCB322D49B27">
+              <dmn:text>DoubleScienceCredit</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_5B192294-BBA4-437C-8D77-158CC90620F6" name="Credit Outcome" typeRef="Any"/>
+        <dmn:decisionTable id="_36D9DB22-9408-42FF-B47A-9B6D5DA9AD6B" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+          <dmn:input id="_DFD73A1B-07E3-4867-B894-F8864DBBD9B8">
+            <dmn:inputExpression id="_BE261752-703A-4E2D-8AED-DBE65D5F78FD" typeRef="number">
+              <dmn:text>IGCSECount</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:input id="_AA23C826-F10D-4686-AC23-B73CD79978B6">
+            <dmn:inputExpression id="_5ACBF000-CDDA-43D0-A47A-0E17AB229E77" typeRef="number">
+              <dmn:text>OLevelCount</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:output id="_57A16E22-4ECB-4F9C-9577-1D620BA42E85" name="Meets Credit" typeRef="boolean"/>
+          <dmn:output id="_3AB5AF78-FC12-478D-97E8-64694EE42D0A" name="Reason" typeRef="string"/>
+          <dmn:annotation name="annotation-1"/>
+          <dmn:rule id="_427701F4-65E8-4B46-B06F-D52158A7948A">
+            <dmn:inputEntry id="_12763BE1-1260-41F6-8D5F-1340D9ACAF17">
+              <dmn:text>&gt;=7</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_44F8E1E5-B4B6-45E9-B5DD-959E5826B8D0">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_38C77A54-AD20-4D30-A923-C5D88B6C4B98">
+              <dmn:text>true</dmn:text>
+            </dmn:outputEntry>
+            <dmn:outputEntry id="_BE45447B-B12A-40AC-82B6-65F00D8E2FA9">
+              <dmn:text>"meets required credit"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_1884FA83-58BC-4BD2-905E-5BD7147FCFE8">
+            <dmn:inputEntry id="_B13065D8-A009-4AE3-8A52-A5324040777C">
+              <dmn:text>6</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_6531D794-5E14-41CD-A38E-5306182A64E1">
+              <dmn:text>&gt;=1</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_BE964EB7-A91F-414A-A9FE-779595E18FB7">
+              <dmn:text>true</dmn:text>
+            </dmn:outputEntry>
+            <dmn:outputEntry id="_9F286AE2-ABEF-429C-8E0D-B9F173ED2037">
+              <dmn:text>"6 IGCSE plus 1 O Level"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_DC8D763B-8B6C-468A-8FBE-42CB7A00B33F">
+            <dmn:inputEntry id="_E3778734-870F-4BC5-8C51-DE36B8CB1E70">
+              <dmn:text>&lt;=6</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_712C9BC1-63C8-407C-AE2A-7659AB31B48B">
+              <dmn:text>&lt;1</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_24CE2B01-8959-4CD7-A0B5-6CE817CDED4E">
+              <dmn:text>false</dmn:text>
+            </dmn:outputEntry>
+            <dmn:outputEntry id="_396AF3B3-D2F3-475F-B375-E2220B9B27AE">
+              <dmn:text>"Not enough passing syllabus"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_66BECF6F-31E6-49DD-833E-342FEC892E9C">
+            <dmn:inputEntry id="_C01C918B-8C1C-416F-8B6F-79B5AD29227C">
+              <dmn:text>&lt;6</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_8FB14828-6F08-4C4F-94A2-9A0EDAFA0340">
+              <dmn:text>&gt;1</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_185AD0EC-141C-4BDA-9EC8-4DAF012CC8A3">
+              <dmn:text>false</dmn:text>
+            </dmn:outputEntry>
+            <dmn:outputEntry id="_1A15041C-DFAA-421E-B44D-565A03FAEA36">
+              <dmn:text>"may only use one O Level syllabus"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_B1E4AB76-5D44-41EC-8F20-6287235AAB17">
+            <dmn:inputEntry id="_BB22F7DE-2110-497F-9736-BF24B6277520">
+              <dmn:text>&lt;6</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_65E50A82-0DB9-41ED-A593-36B51CA5766D">
+              <dmn:text>1</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_7164EB11-1375-4C34-925F-74D55D40F6BB">
+              <dmn:text>false</dmn:text>
+            </dmn:outputEntry>
+            <dmn:outputEntry id="_44AA83A2-C9A2-4D7C-B216-58694494029D">
+              <dmn:text>"Not enough passing syllabus"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_61365961-6DBA-493B-8ABC-1E8C8064C9B5">
+            <dmn:inputEntry id="_A07B4A69-E1FE-4C68-A2F2-693B7445840B">
+              <dmn:text>(6..7)</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_6FC9CF73-1B43-4DB3-867F-BA852AED33E6">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_F42A9EEB-B3B3-43EB-A3A4-6BF12520D95F">
+              <dmn:text>false</dmn:text>
+            </dmn:outputEntry>
+            <dmn:outputEntry id="_A35F908D-411E-45A5-A339-5C7BFF21AB92">
+              <dmn:text>""</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+        </dmn:decisionTable>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_F938F9C9-9F66-4E57-BE6E-D52BEC729BFE">
+          <dmn:text>if Credit Outcome = "meets required credit" then true else Credit Outcome</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:decision id="_2FDED9B7-B4BB-42EA-B32E-31E696760586" name="Grading">
+    <dmn:extensionElements/>
+    <dmn:variable id="_74CB1485-FC1C-467C-A0A2-F105A58299A0" name="Grading" typeRef="ICE Grade Set"/>
+    <dmn:informationRequirement id="_7107D403-F80A-40FB-A449-790E8BB2D137">
+      <dmn:requiredDecision href="#_67A3CD4D-F060-4648-BD05-2340D7824DC3"/>
+    </dmn:informationRequirement>
+    <dmn:context id="_0304F0AC-88E7-48A3-B6EA-45CB41628FCD">
+      <dmn:contextEntry>
+        <dmn:variable id="_993352CA-A13E-45C3-843A-41ED06A7542A" name="Count of A*-A" typeRef="number"/>
+        <dmn:literalExpression id="_6E45F325-3D89-4C4B-B796-4DE303DB5662">
+          <dmn:text>(count(CandidateValidCombination[SYLL_GRADE = "A*" or SYLL_GRADE = "A"])) + (count(CandidateValidCombination[SYLL_GRADE = "A*A*" or SYLL_GRADE = "AA"])*2)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_C21574A3-F709-4180-84E7-7C0798892780" name="Count of B-C" typeRef="number"/>
+        <dmn:literalExpression id="_3CAEE0FA-8634-4ABA-84DC-A2B7E1D6357C">
+          <dmn:text>(count(CandidateValidCombination[SYLL_GRADE = "B" or SYLL_GRADE = "C"])) + (count(CandidateValidCombination[SYLL_GRADE = "BB" or SYLL_GRADE = "CC"])*2)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_63C48EBA-10AD-47D5-B620-9CA285AD6DB6" name="Count above C" typeRef="number"/>
+        <dmn:literalExpression id="_2C9172A5-A8A5-4224-B34F-29D1A787638E">
+          <dmn:text>Count of A*-A + Count of B-C</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_9F6E1C02-F48F-4000-B905-6449D580EE15" name="Count of D-F" typeRef="number"/>
+        <dmn:literalExpression id="_9F5679D1-DE01-48A8-B0F1-09D15A534880">
+          <dmn:text>(count(CandidateValidCombination[SYLL_GRADE = "D" or SYLL_GRADE = "E" or SYLL_GRADE = "F"])) +(count(CandidateValidCombination[SYLL_GRADE = "DD" or SYLL_GRADE = "EE" or SYLL_GRADE = "FF"])*2)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_B1494808-3796-4D86-83B4-F2B045FDD93C" name="Count above G" typeRef="number"/>
+        <dmn:literalExpression id="_F2C2C90B-C489-434F-85D7-180DCBA60252">
+          <dmn:text>(count(CandidateValidCombination[SYLL_GRADE = "G"])) + (count(CandidateValidCombination[SYLL_GRADE = "GG"]) *2)+ Count of D-F + Count above C</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_53FF831E-9DC3-4AFE-B747-A1BF2F877096" name="Outcome" typeRef="ICE Grade Set"/>
+        <dmn:decisionTable id="_961EE565-5C61-49FC-9DCF-5BCD24F2AA38" hitPolicy="PRIORITY" preferredOrientation="Rule-as-Row">
+          <dmn:input id="_9E27B7C7-55F0-4433-BA5D-92110B42CCD3">
+            <dmn:inputExpression id="_2AD1CEB3-29A5-4193-8547-E4A0C8E8F1A0" typeRef="number">
+              <dmn:text>Count of A*-A</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:input id="_9CB7C907-362E-4D80-AC71-3CA944EABB27">
+            <dmn:inputExpression id="_F125134D-99F0-487E-8421-40F09BC8481D" typeRef="number">
+              <dmn:text>Count above C</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:input id="_8179FD76-C09C-4F58-B50D-5FF334FE79C1">
+            <dmn:inputExpression id="_320A9179-484E-4E98-84CD-7687C9149181" typeRef="number">
+              <dmn:text>Count of D-F</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:input id="_3D48FE0F-3C54-441B-8087-B4A56CF7C59F">
+            <dmn:inputExpression id="_8E4A126B-8F78-48E6-85C7-362ACA52BCD2" typeRef="number">
+              <dmn:text>Count above G</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:output id="_8AE193F7-79DD-4E42-9E63-094ADF9D2097"/>
+          <dmn:annotation name="annotation-1"/>
+          <dmn:rule id="_5D1D3DB7-9377-422B-B842-F3C7FB48FE74">
+            <dmn:inputEntry id="_35170302-9C18-47D9-BF1A-5D6C72BF705D">
+              <dmn:text>&gt;=7</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_BC8CA2C8-CE9A-4703-8D81-82D2074206B8">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_4B2AFB3F-134D-45E6-B3A9-F14068CE3154">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_28AC9170-B07F-4AB1-B47E-4561304CDC08">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_FB7816B1-AA35-4D90-B28C-31728937C851">
+              <dmn:text>"Distinction"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_00825131-433D-4544-A5E0-A14EE89CDBE4">
+            <dmn:inputEntry id="_BB9F8EDB-806B-4D0B-8EAB-0BE231F18416">
+              <dmn:text>&gt;=5</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_609E18FB-C6CD-4CD6-92EB-83690A9E8AB3">
+              <dmn:text>&gt;=2</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_B2AD3639-6407-42AD-B52B-66C23FE02B2B">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_A0F418AD-4F6D-42A3-AE0C-604B015E6E55">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_05FBC61D-EA00-4104-A7AB-B6BDD8F85AEB">
+              <dmn:text>"Distinction"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_9BF9EA9D-5FBA-4462-8D03-ADAA6BE04836">
+            <dmn:inputEntry id="_0A739130-59C1-4241-972F-A4B0E61147FF">
+              <dmn:text>&gt;5</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_6A4B25B6-369A-408C-BC11-3FA4C1B61097">
+              <dmn:text>&gt;1</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_7C960B4C-42FA-47B3-A51F-4A1947AD85C9">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_B54A7390-B8BD-406B-94D8-1A0EDE1F2689">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_B3EE7FEB-A395-470E-86FA-095F5C3DEA3E">
+              <dmn:text>"Distinction"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_BDEF6990-BBDE-4367-9085-96E2E5688499">
+            <dmn:inputEntry id="_AF5BCAB7-B846-4F2D-B157-A495A323AB10">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_E59A4129-B2D8-41C1-B106-EEBC31E324DB">
+              <dmn:text>&gt;=7</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_4E94E8AE-E825-4D9B-99BD-2CCCB2A4772A">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_37C4A9E0-6DE0-463A-8E7D-703278BF2993">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_C9561324-59B8-4BEF-8C43-EEFBE2AE51D8">
+              <dmn:text>"Merit"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_A7B0051A-D2E2-4E38-9C8B-EDE16753164B">
+            <dmn:inputEntry id="_5562B391-B790-4546-B7E2-58C5D26FDDB8">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_FCDFC1BA-39D2-4CB9-B529-2291F9C2005D">
+              <dmn:text>&gt;5</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_08FB7056-E3FF-43E6-BE57-875EA6D1E0E2">
+              <dmn:text>&gt;=1</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_C1D02B4F-144D-4287-BCE7-E8C613A849F3">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_03FD5267-71E5-4117-9A57-D328006580B4">
+              <dmn:text>"Merit"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_F0BDD352-F3F9-476C-8C95-6265BF592006">
+            <dmn:inputEntry id="_720E4D8B-0645-42BE-BE8A-73B53C71693D">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_F68FBDCD-814A-41DB-B40A-F3682BB5432B">
+              <dmn:text>&gt;=5</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_8F7A92BC-E76E-4521-A756-5F05BA175602">
+              <dmn:text>&gt;=2</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_1544291A-26CA-4FD9-8C58-D50037CAD767">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_469547F3-B501-4A6D-B5BE-9B1F7F492D40">
+              <dmn:text>"Merit"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_45FD9CB6-271A-42B5-A0AC-CB41D533A773">
+            <dmn:inputEntry id="_8EAB0485-2C30-4AA9-9C0F-119A43B0654A">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_6C0C2859-FE1A-4B81-8895-9B4F2346D967">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_59EB4768-155E-49E0-87DA-713E4CD861EA">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_558112B1-F339-4C07-A7FA-F155032F8936">
+              <dmn:text>&gt;=7</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_B177914C-7C74-4198-8A80-C1BC655E9813">
+              <dmn:text>"Pass"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_3BE383C3-3698-4C35-9C3E-D3059FE4336E">
+            <dmn:inputEntry id="_7F8785A6-932B-4880-8993-6FBEF194187B">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_A4840AC2-4504-42AD-A303-D59FE8DED978">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_4169CF3E-8E54-4407-80E5-688902C96104">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_2FBF9E38-819F-4D93-B503-3D65CF00DE52">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_74E4649C-20F0-4E1D-8807-EFCF10F7F2FD">
+              <dmn:text>"Fail"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+        </dmn:decisionTable>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_3CEF6C1A-EDCB-4B12-A1DD-8254D4431A04">
+          <dmn:text>Outcome</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:decision id="_9D14247E-273A-422B-A84E-4D041D60D65D" name="Mandatory Groups">
+    <dmn:description>Checks whether mandatory group requirements can be met using only unique syllabus - any multi group syllabus options applied in the next decision</dmn:description>
+    <dmn:extensionElements/>
+    <dmn:question>Does candidate have syllabus' that meet the required syll groups </dmn:question>
+    <dmn:variable id="_27772B73-21F0-4A5D-B155-B4A9A5B8892E" name="Mandatory Groups" typeRef="Any"/>
+    <dmn:informationRequirement id="_933E2DAF-5EAF-4453-ABC6-24B6E6E57F31">
+      <dmn:requiredDecision href="#_67A3CD4D-F060-4648-BD05-2340D7824DC3"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_70254C63-3C5F-4608-8D25-4BD6467985DF">
+      <dmn:requiredKnowledge href="#_AB766954-F728-4D23-B91A-90D8FBE62B50"/>
+    </dmn:knowledgeRequirement>
+    <dmn:context id="_06B23646-B3B0-4738-8A12-132DF7D52A11">
+      <dmn:contextEntry>
+        <dmn:variable id="_1D36D5C7-4554-4536-BB4D-BA3EFF4B90EF" name="data" typeRef="Any"/>
+        <dmn:literalExpression id="_01B437F1-42B5-498B-A14A-71D9B2F42F5B">
+          <dmn:text>dataModel()</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_6751C98A-61E3-400B-AA42-376BA733D41C" name="Group 1" typeRef="Any"/>
+        <dmn:context id="_7B858F57-212B-4BFB-B4CA-0FBC4EA41F26">
+          <dmn:contextEntry>
+            <dmn:variable id="_ECECD03D-EE18-46D8-941B-FA31AAC9B6C6" name="UniqueG1Codes" typeRef="List String"/>
+            <dmn:literalExpression id="_E790514E-A697-44FA-B829-4EB9EB57B8E0">
+              <dmn:text>for x in data.G1SyllCodes return if list contains(data.MultiGroupSyll, x) then null else x </dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_412A581C-DD43-4B26-A009-FFE406130A48" name="G1Elements" typeRef="List Candidate Input"/>
+            <dmn:literalExpression id="_D2C91970-AAC9-43A8-9D30-2A987C5870F6">
+              <dmn:text>CandidateValidCombination[list contains(UniqueG1Codes[item != null] , SYLL_CODE )]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:literalExpression id="_78A4D6ED-BA9D-4FF3-ACFC-2EBFBCF37D17">
+              <dmn:text>if count(G1Elements) = 1 then "only 1 G1 passing grade" else if count(G1Elements) &gt;1 then true else false</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_526000F5-445E-49D8-ACB8-E00BCCC37685" name="Group 2" typeRef="Any"/>
+        <dmn:context id="_55506C4B-CCF4-415D-ABDD-E5C268075273">
+          <dmn:contextEntry>
+            <dmn:variable id="_3A561C82-BD86-4268-BC8B-D92C502526BB" name="UniqueG2Codes" typeRef="List String"/>
+            <dmn:literalExpression id="_BFE3F6E5-ABAF-461B-BBA3-31C5BB382334">
+              <dmn:text>for x in data.G2SyllCodes return if list contains(data.MultiGroupSyll, x) then null else x </dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_EC4A3B2F-550B-4CD0-B861-9C93C437D01C" name="G2Elements" typeRef="List Candidate Input"/>
+            <dmn:literalExpression id="_B37A441A-918F-4667-8D10-A5CC5829A561">
+              <dmn:text>CandidateValidCombination[list contains(UniqueG2Codes[item != null] , SYLL_CODE )]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:literalExpression id="_462E22C1-D175-4C3B-AC33-ECB8FD35F4EA">
+              <dmn:text>if count(G2Elements) &gt;0 then true else false</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_47B0BD66-F0E6-4F5B-9DC6-93BA99804CD1" name="Group 3" typeRef="Any"/>
+        <dmn:context id="_FD6C0678-235F-4D1D-BBF9-F700311281E9">
+          <dmn:contextEntry>
+            <dmn:variable id="_259B1022-4249-4560-91BB-2EAFE5DEBBB0" name="UniqueG3Codes" typeRef="List String"/>
+            <dmn:literalExpression id="_66B75BB0-D085-4C0F-9BAD-6FE6A8885D50">
+              <dmn:text>for x in data.G3SyllCodes return if list contains(data.MultiGroupSyll, x) then null else x </dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_332E7A9B-D7E8-4241-9EA2-226A781448C2" name="G3Elements" typeRef="List Candidate Input"/>
+            <dmn:literalExpression id="_B55DFFD5-35FF-4067-A36C-8B258EC7AC9F">
+              <dmn:text>CandidateValidCombination[list contains(UniqueG3Codes[item != null] , SYLL_CODE )]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:literalExpression id="_3C9A5D1D-A711-4094-9E78-DC096CA6C98B">
+              <dmn:text>if count(G3Elements) &gt;0 then true else false</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_8D533093-5881-420A-B9E5-48915F2212D1" name="Group 4" typeRef="Any"/>
+        <dmn:context id="_BDCB36CD-456A-403E-BC61-FDA9549F9852">
+          <dmn:contextEntry>
+            <dmn:variable id="_75DABF25-28F0-4EAC-B6CD-82ACAB051D71" name="UniqueG4Codes" typeRef="List String"/>
+            <dmn:literalExpression id="_C75FE74F-2C95-411D-B839-9A041ABFA6CE">
+              <dmn:text>for x in data.G4SyllCodes return if list contains(data.MultiGroupSyll, x) then null else x </dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_58E45601-D6AE-4C71-858A-DE3A269A839C" name="G4Elements" typeRef="List Candidate Input"/>
+            <dmn:literalExpression id="_E22AB75E-5D2F-4F9B-9AAC-E3F296E14CDE">
+              <dmn:text>CandidateValidCombination[list contains(UniqueG4Codes[item != null] , SYLL_CODE )]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:literalExpression id="_7003A585-5D27-4113-914D-A9F63FBB5051">
+              <dmn:text>if count(G4Elements) &gt;0 then true else false</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_744DDB8A-455A-4027-817F-7EE8D327778E" name="Group 5" typeRef="Any"/>
+        <dmn:context id="_5937E909-36EF-4B9C-872A-F6707424620D">
+          <dmn:contextEntry>
+            <dmn:variable id="_E1AEA653-B6E6-435F-BD00-0B6B23599211" name="UniqueG5Codes" typeRef="List Candidate Input"/>
+            <dmn:literalExpression id="_DF72E73A-0F3C-4419-BEDB-B1471150B131">
+              <dmn:text>for x in data.G5SyllCodes return if list contains(data.MultiGroupSyll, x) then null else x </dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_D42306A7-DFDF-4103-BE4F-7A08C282CB80" name="G5Elements" typeRef="List Candidate Input"/>
+            <dmn:literalExpression id="_647ED188-AAE9-4C8D-8160-41FAFFAB43F4">
+              <dmn:text>CandidateValidCombination[list contains(UniqueG5Codes[item != null] , SYLL_CODE )]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:literalExpression id="_7589829B-7CEB-47FD-B688-EB1646E28527">
+              <dmn:text>if count(G5Elements) &gt;0 then true else false</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_8540797D-EAE6-4E33-9726-078580DDC51B">
+          <dmn:text>{"Group 1": Group 1, "Group 2": Group 2, "Group 3": Group 3, "Group 4": Group 4, "Group 5": Group 5}</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:decision id="_E5CE517F-F6F9-41D2-96CA-5647971F4B3D" name="Multi Group Syllabus">
+    <dmn:extensionElements/>
+    <dmn:variable id="_C2E4388A-300C-494B-969C-00EFA717FAF1" name="Multi Group Syllabus" typeRef="Any"/>
+    <dmn:informationRequirement id="_44EC3DDF-E5BD-4C7F-8549-5938FACA546B">
+      <dmn:requiredDecision href="#_9D14247E-273A-422B-A84E-4D041D60D65D"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_8A9B947E-A712-4607-9813-338910FF5683">
+      <dmn:requiredDecision href="#_67A3CD4D-F060-4648-BD05-2340D7824DC3"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_F826ACDA-1AA3-4B7B-83A8-EFB9A18A274B">
+      <dmn:requiredDecision href="#_09ED9FD2-1CDD-44F6-B0AD-341729921BA8"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_7BB2374E-CC37-4FDE-9076-D421146D6045">
+      <dmn:requiredKnowledge href="#_AB766954-F728-4D23-B91A-90D8FBE62B50"/>
+    </dmn:knowledgeRequirement>
+    <dmn:context id="_4817474F-A9E0-4B9A-9828-00D6DCA265A4">
+      <dmn:contextEntry>
+        <dmn:variable id="_E72B770C-DCB6-47AA-85B7-DE6653CCE474" name="data" typeRef="Any"/>
+        <dmn:literalExpression id="_D20366AC-45AA-4484-9753-7F99C736C697">
+          <dmn:text>dataModel()</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_28F05421-5C58-4606-837E-09F3BAE632F0" name="G1 Result" typeRef="Any"/>
+        <dmn:context id="_E296DBF2-BB28-4676-8F1F-AEA802628712">
+          <dmn:contextEntry>
+            <dmn:variable id="_15234D53-2FA2-49F4-A332-339298D3FB3D" name="multigroupSyllabusInInput" typeRef="List String"/>
+            <dmn:literalExpression id="_965B8B34-DBF7-4909-852D-536FC36E0D4D">
+              <dmn:text>CandidateValidCombination.SYLL_CODE[item in data.MultiGroupSyll]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_6037DDF7-1614-4672-B679-EAF844CFF807" name="Does G1 has multi group syllabuses in input?" typeRef="boolean"/>
+            <dmn:literalExpression id="_4780B964-864A-4C26-AD88-EE2325C1D03B">
+              <dmn:text>some i in data.G1SyllCodes satisfies list contains( multigroupSyllabusInInput, i ) = true
+</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_9211BE13-A4EF-49FC-BBA3-859F945D76AE" name="common syll in Group1" typeRef="List String"/>
+            <dmn:literalExpression id="_CA1E5C1B-39B1-4591-9FCE-FBE663280445">
+              <dmn:text>multigroupSyllabusInInput[item in data.G1SyllCodes]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_57EE568E-89CE-480C-B821-A6316B49E94C" name="g1 res" typeRef="Any"/>
+            <dmn:decisionTable id="_F750D13A-3A09-47AB-8E45-4E0273EE2E4A" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+              <dmn:input id="_A219358E-ADEF-4464-9168-F1DCB1D82AED">
+                <dmn:inputExpression id="_D29F54B2-F873-4794-BAD2-821D1B9D67FC" typeRef="boolean">
+                  <dmn:text>Mandatory Groups.Group 1</dmn:text>
+                </dmn:inputExpression>
+              </dmn:input>
+              <dmn:input id="_35A22EF9-1F4F-4B4C-8BA6-24F464F4C3C3">
+                <dmn:inputExpression id="_6C7F06D2-8C9F-44C7-9FF0-50B97787198F" typeRef="boolean">
+                  <dmn:text>Does G1 has multi group syllabuses in input?</dmn:text>
+                </dmn:inputExpression>
+              </dmn:input>
+              <dmn:output id="_80CBDFB0-8C7C-408F-90C6-00843193F3EC"/>
+              <dmn:annotation name="annotation-1"/>
+              <dmn:rule id="_D7804646-9B1A-40FD-81B9-066534A83C9E">
+                <dmn:inputEntry id="_73DCB8D7-0532-4034-A448-2CD5A8C9210E">
+                  <dmn:text>true</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_5FC61927-81ED-4C6F-85BF-E65BCEED2BB3">
+                  <dmn:text>-</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_E0C17925-6BC8-4EFE-BE91-1D1E0144ACC4">
+                  <dmn:text>{"Does candidate have group 1?":true,"multigroupSyllabusInInput" : multigroupSyllabusInInput}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+              <dmn:rule id="_806EA374-9DB8-42D6-A0D2-7AFEBEC28786">
+                <dmn:inputEntry id="_A98ABE22-9B41-4F1B-9BFF-7177AD2ACFDC">
+                  <dmn:text>"only 1 G1 passing grade"</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_0305A5D4-14A0-4FC0-B64D-55C1AE566CC7">
+                  <dmn:text>-</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_AB1E911A-839F-4CFE-8F9D-3BAF3DA84A70">
+                  <dmn:text>{"Does candidate have group 1?": "only 1 G1 passing grade","multigroupSyllabusInInput" : multigroupSyllabusInInput}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+              <dmn:rule id="_0388158E-149C-4885-8CA8-770E0C6F9D9D">
+                <dmn:inputEntry id="_83325B3E-C117-4684-BFC7-51C2CA23AB74">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_87B275E2-D579-4ACD-8427-9792556D45B9">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_24AB1AEA-B435-403A-A212-B9E33307AE8F">
+                  <dmn:text>{"Does candidate have group 1?": false,"multigroupSyllabusInInput" : multigroupSyllabusInInput}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+              <dmn:rule id="_8D8592ED-D309-4CEC-85FF-0318832556B5">
+                <dmn:inputEntry id="_57F600BE-BB0F-4B85-9455-CE1804854E28">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_C5F37CCE-4A28-44CE-9837-7E2D0C6EC83B">
+                  <dmn:text>true</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_5B798E3D-4237-4190-8919-B5F9E8EFC7F5">
+                  <dmn:text>{"Does candidate have group 1?": true,"multigroupSyllabusInInput" : remove(multigroupSyllabusInInput, index of(multigroupSyllabusInInput, max(common syll in Group1)))}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+            </dmn:decisionTable>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:literalExpression id="_6C4D28D0-2254-4DB3-9C73-8787A7B9C300">
+              <dmn:text>g1 res</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_29722B79-EC81-425B-AD90-987028A39A2F" name="G3 Result" typeRef="Any"/>
+        <dmn:context id="_8DC27ACC-68F8-43C3-A044-E92338E3EEDA">
+          <dmn:contextEntry>
+            <dmn:variable id="_17DC2857-741A-4D65-B9D9-2EA6E3F81062" name="multigroupSyllabusInInput" typeRef="List String"/>
+            <dmn:literalExpression id="_58B0A44E-D71E-429D-88D6-483CA969550D">
+              <dmn:text>G1 Result.multigroupSyllabusInInput[item!=null]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_40D3AFF3-259B-4179-8F61-C808B459A525" name="Does G3 has multi group syllabuses in input?" typeRef="boolean"/>
+            <dmn:literalExpression id="_5AB8E778-8DE5-4EE3-BC7D-97E809B6C4AB">
+              <dmn:text>some i in data.G3SyllCodes satisfies list contains( multigroupSyllabusInInput, i ) = true
+</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_F10A1536-6D7D-4BB2-AB40-11989B760791" name="common syll in Group3" typeRef="List String"/>
+            <dmn:literalExpression id="_9786D1DE-F6D8-42DF-A282-32CC27426E4C">
+              <dmn:text>multigroupSyllabusInInput[item in data.G3SyllCodes]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_31B39C8D-4B2A-4DE3-AB43-C42854E2D979" name="g3 res" typeRef="Any"/>
+            <dmn:decisionTable id="_0EBBEBA2-8EF9-4D3C-B519-42424040B314" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+              <dmn:input id="_7746195D-8DB0-4F06-A4F5-06ADE23E8ED1">
+                <dmn:inputExpression id="_8F077FF6-F7A4-45E3-8E6B-9398F5F4921D" typeRef="boolean">
+                  <dmn:text>Mandatory Groups.Group 3</dmn:text>
+                </dmn:inputExpression>
+              </dmn:input>
+              <dmn:input id="_CA4FC2B4-D475-4774-A04E-7A205A02090C">
+                <dmn:inputExpression id="_2CAD493D-5FE9-41B2-A124-1151CC33D86F" typeRef="boolean">
+                  <dmn:text>Does G3 has multi group syllabuses in input?</dmn:text>
+                </dmn:inputExpression>
+              </dmn:input>
+              <dmn:output id="_8E3303C6-E554-4428-A9E6-90D0634F4C09"/>
+              <dmn:annotation name="annotation-1"/>
+              <dmn:rule id="_2FD71804-C888-4B16-9724-B16A98511463">
+                <dmn:inputEntry id="_23A145DA-1E17-40A1-AC60-53AC21B2F24E">
+                  <dmn:text>true</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_2676CEF8-CC37-433A-BF32-E6DD9507F5FC">
+                  <dmn:text>-</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_F2C8CEFE-E844-4C55-A068-1F0B126D6E68">
+                  <dmn:text>{"Does candidate have group 3?":true,"multigroupSyllabusInInput" : multigroupSyllabusInInput}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+              <dmn:rule id="_221A0040-6A5A-468C-9A1E-71EC7D01A309">
+                <dmn:inputEntry id="_BE70D451-A9DF-4E05-BEC5-CBAFFB3388B5">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_BD7B56C4-8F46-4790-A510-A5042268A7E1">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_65963C8C-A6D1-43D7-BAF1-9ABA1C11705A">
+                  <dmn:text>{"Does candidate have group 3?": false,"multigroupSyllabusInInput" : multigroupSyllabusInInput}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+              <dmn:rule id="_8BB49B2F-B5B3-4DCB-9616-A53A263AC3E5">
+                <dmn:inputEntry id="_65F63A5D-E6AD-486B-AF20-2FC8182A56AC">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_C2B2371A-5D85-418F-8063-0403FCC65B54">
+                  <dmn:text>true</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_7F8C5A09-E431-4A97-8E6D-BF293C34AC91">
+                  <dmn:text>{"Does candidate have group 3?": true,"multigroupSyllabusInInput" : remove(multigroupSyllabusInInput, index of(multigroupSyllabusInInput, max(common syll in Group3)))}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+            </dmn:decisionTable>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:literalExpression id="_8920B715-B866-4E06-B95C-E72B5E2C644E">
+              <dmn:text>g3 res</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_ACFF3616-1304-4D04-853A-8AC8BBEAF9CB" name="G4 Result" typeRef="Any"/>
+        <dmn:context id="_7B8C728D-C2B6-45DB-8E6C-3A6CDBCD92C9">
+          <dmn:contextEntry>
+            <dmn:variable id="_FD8B5440-6E03-4D64-8C44-695D80D5CB29" name="multigroupSyllabusInInput" typeRef="List String"/>
+            <dmn:literalExpression id="_6AFB68AB-2BD1-4B2E-B2C0-7BE3F3C0A67B">
+              <dmn:text>G3 Result.multigroupSyllabusInInput[item != null]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_567E48CD-34AB-4ADC-B6FB-778DB84880A1" name="Does G4 has multi group syllabuses in input?" typeRef="boolean"/>
+            <dmn:literalExpression id="_68917BA0-6C0C-48C8-8387-9ECF10B4375A">
+              <dmn:text>some i in data.G4SyllCodes satisfies list contains( multigroupSyllabusInInput, i ) = true
+</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_2D7671BD-EF3D-4499-A0A6-1F2A9330E3FD" name="common syll in Group4" typeRef="List String"/>
+            <dmn:literalExpression id="_3BBEFB59-7730-42F3-868D-D1E13F82AECE">
+              <dmn:text>multigroupSyllabusInInput[item in data.G4SyllCodes]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_EA6676B3-BA4B-4C77-B469-45F9181089D1" name="g4 res" typeRef="Any"/>
+            <dmn:decisionTable id="_1D1EFF90-341A-4F8A-9202-A23B398F60FB" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+              <dmn:input id="_906FB9C1-CECD-4AB7-907F-52EB94F37E4A">
+                <dmn:inputExpression id="_F6FC89BA-B06C-4B03-AF8E-179926A02094" typeRef="boolean">
+                  <dmn:text>Mandatory Groups.Group 4</dmn:text>
+                </dmn:inputExpression>
+              </dmn:input>
+              <dmn:input id="_8C906384-523F-41F9-9659-F68B9344495C">
+                <dmn:inputExpression id="_A4656C6E-1ED7-4AEB-8D66-31B67DFB6E1A" typeRef="boolean">
+                  <dmn:text>Does G4 has multi group syllabuses in input?</dmn:text>
+                </dmn:inputExpression>
+              </dmn:input>
+              <dmn:output id="_7E60CB02-CDF0-44C2-B061-1AFC4FBB12A6"/>
+              <dmn:annotation name="annotation-1"/>
+              <dmn:rule id="_83D6D5DB-D5CE-4B44-9C49-8CDCC8DADFF8">
+                <dmn:inputEntry id="_07D4B376-FB3B-450F-B2A2-406DD7D9E362">
+                  <dmn:text>true</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_787C2233-94C6-4FC4-8835-896217810884">
+                  <dmn:text>-</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_C80D80D1-187B-45D5-AECE-8210E0C02BC0">
+                  <dmn:text>{"Does candidate have group 4?":true,"multigroupSyllabusInInput" : multigroupSyllabusInInput}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+              <dmn:rule id="_96BA49FE-1F24-413D-BA22-7442F351E89F">
+                <dmn:inputEntry id="_8F7AAED2-070A-46FB-AD13-1BDFF1169E5E">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_2E814A89-13DE-4761-88AC-E5F2E36964A1">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_02D8657D-0AD0-434F-8A7B-901FAAF71E02">
+                  <dmn:text>{"Does candidate have group 4?": false,"multigroupSyllabusInInput" : multigroupSyllabusInInput}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+              <dmn:rule id="_A6EE9A01-FF28-4E3E-B81A-667C6B3626C7">
+                <dmn:inputEntry id="_DBCBEB74-43EE-4523-B9EB-A8783851F79E">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_FBCAB3D1-C911-4771-94DE-1E2D1E10C670">
+                  <dmn:text>true</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_4D1E7654-FBD4-434C-920C-AE61AD89526B">
+                  <dmn:text>{"Does candidate have group 4?": true,"multigroupSyllabusInInput" : remove(multigroupSyllabusInInput, index of(multigroupSyllabusInInput, max(common syll in Group4)))}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+            </dmn:decisionTable>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:literalExpression id="_D463A629-4E36-43FD-8AAF-5F5C7B41DAEB">
+              <dmn:text>g4 res</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_1A9B037D-1EF1-4335-94C6-09AB4BBC2AAD" name="G5 Result" typeRef="Any"/>
+        <dmn:context id="_DB7B0E68-26F1-4A72-AB5B-A468CA9977B3">
+          <dmn:contextEntry>
+            <dmn:variable id="_1750412E-01CC-45D6-8D25-0E9BCA26E86F" name="multigroupSyllabusInInput" typeRef="List String"/>
+            <dmn:literalExpression id="_FF059312-CAEA-4C8A-A892-8FC3D2D88E5D">
+              <dmn:text>G4 Result.multigroupSyllabusInInput[item != null]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_1E36D323-185A-4D6D-A021-6FDB1D4C41DA" name="Does G5 has multi group syllabuses in input?" typeRef="boolean"/>
+            <dmn:literalExpression id="_2544D831-6BFF-4774-81EB-0E4C09330FBE">
+              <dmn:text>some i in data.G5SyllCodes satisfies list contains( multigroupSyllabusInInput, i ) = true
+</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_A9C8CE09-5223-487F-9DA9-97E200EB0925" name="common syll in Group5" typeRef="List String"/>
+            <dmn:literalExpression id="_4BB94D13-2190-4CED-9C3E-9BCE116181D4">
+              <dmn:text>multigroupSyllabusInInput[item in data.G5SyllCodes]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_0E9365CC-A59A-453B-A675-DFEF2371750E" name="g5 res" typeRef="Any"/>
+            <dmn:decisionTable id="_397FC8AC-20DD-4BDC-BB14-975EA85F1F95" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+              <dmn:input id="_38683E7D-EB4E-4773-8EFD-C327DE1B8435">
+                <dmn:inputExpression id="_623AFE05-C090-41E5-8937-AD62FDC175C3" typeRef="boolean">
+                  <dmn:text>Mandatory Groups.Group 5</dmn:text>
+                </dmn:inputExpression>
+              </dmn:input>
+              <dmn:input id="_590B16A8-4CFE-4FF0-B17B-19DC7736DC87">
+                <dmn:inputExpression id="_D2EDAC98-3F48-495D-B889-3BCFC8AD3492" typeRef="boolean">
+                  <dmn:text>Does G5 has multi group syllabuses in input?</dmn:text>
+                </dmn:inputExpression>
+              </dmn:input>
+              <dmn:output id="_D832B463-0F3F-4E14-88D8-63D314E7E60B"/>
+              <dmn:annotation name="annotation-1"/>
+              <dmn:rule id="_31BB2DB0-7EB2-461D-A63D-6A0787A881B9">
+                <dmn:inputEntry id="_1BB5E16A-CEC1-421F-8148-9DAB2456101F">
+                  <dmn:text>true</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_E93AF2F0-EC37-4C5A-A89C-D28FF8072608">
+                  <dmn:text>-</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_B883EBF9-F215-4E7A-8B14-43C73BD54C1F">
+                  <dmn:text>{"Does candidate have group 5?":true,"multigroupSyllabusInInput" : multigroupSyllabusInInput}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+              <dmn:rule id="_E5A17D01-0599-43F2-81D4-F328E0AC511F">
+                <dmn:inputEntry id="_BC3C148E-B4E2-4394-9D7B-1D5E88127D58">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_363A18FF-2F01-4579-ABCD-07053BD435CE">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_C783DCA8-4FC4-472C-B052-FF68A2EA019F">
+                  <dmn:text>{"Does candidate have group 5?": false,"multigroupSyllabusInInput" : multigroupSyllabusInInput}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+              <dmn:rule id="_A8270769-80F4-4C3C-BF47-F634290030FE">
+                <dmn:inputEntry id="_B43E6ACB-EDEC-4979-9149-41A6B6247B29">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_6FD2055A-A78D-459E-B4CA-6B2E423BAB35">
+                  <dmn:text>true</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_00E87EA9-8B04-4486-990A-A63EA69E3FCC">
+                  <dmn:text>{"Does candidate have group 5?": true,"multigroupSyllabusInInput" : remove(multigroupSyllabusInInput, index of(multigroupSyllabusInInput, max(common syll in Group5)))}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+            </dmn:decisionTable>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:literalExpression id="_35F9F267-0207-4418-9BAC-7547FB51BC48">
+              <dmn:text>g5 res</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_1669C5EF-4253-47C5-BEE5-621EA20D78E8" name="Mand Group Group two" typeRef="boolean"/>
+        <dmn:literalExpression id="_0B8FD941-F5BC-4739-BB2A-5C0876BAEC35">
+          <dmn:text>Mandatory Groups.Group2</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:variable id="_AA35B3F7-AC60-4BBC-946A-3EF4C6C943E3" name="G2 Result" typeRef="Any"/>
+        <dmn:context id="_2B0FB962-8E6C-43C5-82CB-0A1B824758B6">
+          <dmn:contextEntry>
+            <dmn:variable id="_254DADD1-8A2B-417B-921A-01AF9C4ED12B" name="multigroupSyllabusInInput" typeRef="List String"/>
+            <dmn:literalExpression id="_971D7A60-CFC6-40AE-9D6A-3B7B720FBAF3">
+              <dmn:text>G5 Result.multigroupSyllabusInInput[item != null]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_58948E48-91C0-4802-90C7-6A33F0F3B0B8" name="Does G2 has multi group syllabuses in input?" typeRef="boolean"/>
+            <dmn:literalExpression id="_0E9E02CF-870E-474E-92A7-F009362AB874">
+              <dmn:text>some i in data.G2SyllCodes satisfies list contains( multigroupSyllabusInInput, i ) = true
+</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_537325A3-C472-43F7-A02F-2F964A3BADA1" name="common syll in Group2" typeRef="List String"/>
+            <dmn:literalExpression id="_95417563-FBE4-4818-B2A2-9BF5C65B63AE">
+              <dmn:text>multigroupSyllabusInInput[item in data.G2SyllCodes]</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:variable id="_F2C71A1F-F5FE-40A8-B535-515C37E1A0BC" name="g2 res" typeRef="Any"/>
+            <dmn:decisionTable id="_B30B53B1-C6D2-4115-8C2F-6143A25A4EC2" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+              <dmn:input id="_BEBFDA70-B2CD-4948-9C73-3EB3521D54D9">
+                <dmn:inputExpression id="_1F4214EB-F75C-49D7-AFB6-D2BDE016A8A8" typeRef="boolean">
+                  <dmn:text>Mandatory Groups.Group 2</dmn:text>
+                </dmn:inputExpression>
+              </dmn:input>
+              <dmn:input id="_82B8BECD-B842-462A-B78F-0331BCA7EDE8">
+                <dmn:inputExpression id="_A4656C6E-1ED7-4AEB-8D66-31B67DFB6E3A" typeRef="boolean">
+                  <dmn:text>Does G2 has multi group syllabuses in input?</dmn:text>
+                </dmn:inputExpression>
+              </dmn:input>
+              <dmn:output id="_2D2E8467-5BEB-4FB2-B9D7-965A54E4B227"/>
+              <dmn:annotation name="annotation-1"/>
+              <dmn:rule id="_B178A098-DF88-4055-B663-210DAF2D3451">
+                <dmn:inputEntry id="_2C9E9777-A805-41C5-8330-A00E35239753">
+                  <dmn:text>true</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_7607D26D-A4C2-4780-ACC1-35FF6AAFDAE0">
+                  <dmn:text>-</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_225E7A21-5980-4FBB-AD83-7AF3362C62DC">
+                  <dmn:text>{"Does candidate have group 2?":true,"multigroupSyllabusInInput" : multigroupSyllabusInInput}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+              <dmn:rule id="_F4A2008F-0C4B-499F-ABF0-0C038F904689">
+                <dmn:inputEntry id="_994F22AE-3FFE-4A70-8A9B-A1B16A93C026">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_DFD95A1C-2B37-45A4-BEC3-3316BCBBA9CD">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_FB6F5CDD-1DDA-4DC7-BF75-F85F9A898C6B">
+                  <dmn:text>{"Does candidate have group 2?": false,"multigroupSyllabusInInput" : multigroupSyllabusInInput}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+              <dmn:rule id="_1583B7C8-12D3-4807-BA9F-A9371F8EE251">
+                <dmn:inputEntry id="_E6DA4695-1FDD-437C-9896-443614BBBDA4">
+                  <dmn:text>false</dmn:text>
+                </dmn:inputEntry>
+                <dmn:inputEntry id="_34CC2EFF-A7EB-454C-8526-D8A434B7630A">
+                  <dmn:text>true</dmn:text>
+                </dmn:inputEntry>
+                <dmn:outputEntry id="_15377367-3910-4B64-9CC8-E11E6332C875">
+                  <dmn:text>{"Does candidate have group 2?": true,"multigroupSyllabusInInput" : remove(multigroupSyllabusInInput, index of(multigroupSyllabusInInput, max(common syll in Group2)))}</dmn:text>
+                </dmn:outputEntry>
+                <dmn:annotationEntry>
+                  <dmn:text/>
+                </dmn:annotationEntry>
+              </dmn:rule>
+            </dmn:decisionTable>
+          </dmn:contextEntry>
+          <dmn:contextEntry>
+            <dmn:literalExpression id="_FB5F043C-9302-405F-869E-6BCFEDA20804">
+              <dmn:text>g2 res</dmn:text>
+            </dmn:literalExpression>
+          </dmn:contextEntry>
+        </dmn:context>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_F1DCC275-462E-4A4A-A5FD-0ADEFB1B86D7">
+          <dmn:text>{"Does Candidate Have Group 1":G1 Result.Does candidate have group 1?,"Does Candidate Have Group 2":G2 Result.Does candidate have group 2?,"Does Candidate Have Group 3":G3 Result.Does candidate have group 3?, "Does Candidate Have Group 4":G4 Result.Does candidate have group 4?, "Does Candidate Have Group 5":G5 Result.Does candidate have group 5?}</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:decision id="_19DF01BC-6D18-443A-957F-491A06D28B30" name="ICE Eligibility">
+    <dmn:extensionElements/>
+    <dmn:variable id="_00FA6EAE-772E-409B-9771-3ACC0A1F735E" name="ICE Eligibility" typeRef="Any"/>
+    <dmn:informationRequirement id="_0FF22799-30B8-402B-9261-60431FD1BF04">
+      <dmn:requiredDecision href="#_E5CE517F-F6F9-41D2-96CA-5647971F4B3D"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_A950648D-E1E6-4E8C-A8CE-0FB215BC7A07">
+      <dmn:requiredDecision href="#_E5CE517F-F6F9-41D2-96CA-5647971F4B3D"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_06F7DD7F-833F-459E-BBAB-5FA93D27B93F">
+      <dmn:requiredDecision href="#_09ED9FD2-1CDD-44F6-B0AD-341729921BA8"/>
+    </dmn:informationRequirement>
+    <dmn:context id="_5D102B53-17E9-40FA-A7FE-70694F1DEACD">
+      <dmn:contextEntry>
+        <dmn:variable id="_93DD2DBB-9E76-42A0-B903-0A0E5D36F7A2" name="ICE Eligibility Response" typeRef="Any"/>
+        <dmn:decisionTable id="_04F75B54-A566-447E-97F9-D508042733D1" hitPolicy="COLLECT" preferredOrientation="Rule-as-Row">
+          <dmn:input id="_F92EEE48-5C80-403B-B82E-94F6502A6D50">
+            <dmn:inputExpression id="_FA30EA51-7EB2-429E-BDAC-6D4A2E2434A0" typeRef="boolean">
+              <dmn:text>Credit Count.Meets Credit</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:input id="_EB0D9F03-393A-4AA6-A2A4-574653C6A8B3">
+            <dmn:inputExpression id="_78D1D037-0B97-4D96-B795-C260F8F54BE9" typeRef="G1 Outcomes">
+              <dmn:text>Multi Group Syllabus.Does Candidate Have Group 1</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:input id="_82938FF3-8F96-46F8-8291-7108BA732C59">
+            <dmn:inputExpression id="_C2903B89-9863-49B1-BBB6-F8BA945CCC92" typeRef="boolean">
+              <dmn:text>Multi Group Syllabus.Does Candidate Have Group 2</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:input id="_74D99A80-49BF-4062-9017-B2D53227AAEF">
+            <dmn:inputExpression id="_681AE24C-11A1-4C23-8461-5F392F477717" typeRef="boolean">
+              <dmn:text>Multi Group Syllabus.Does Candidate Have Group 3</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:input id="_6A0BFC0D-4932-40C2-8DCA-4FC66A7DB569">
+            <dmn:inputExpression id="_31DCD913-FAA1-4BCC-BCF6-B8FE7F2C4352" typeRef="boolean">
+              <dmn:text>Multi Group Syllabus.Does Candidate Have Group 4</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:input id="_F785D4EF-FAFD-44E6-A213-624618F9A26A">
+            <dmn:inputExpression id="_D6C5EC53-0761-40A8-AA8B-4AE1259CE1B0" typeRef="boolean">
+              <dmn:text>Multi Group Syllabus.Does Candidate Have Group 5</dmn:text>
+            </dmn:inputExpression>
+          </dmn:input>
+          <dmn:output id="_90B7E1E8-F08B-45EB-B0AC-F84BB7F9BFEF"/>
+          <dmn:annotation name="annotation-1"/>
+          <dmn:rule id="_E9C3F684-FF4A-4363-9251-6A321350EE99">
+            <dmn:inputEntry id="_24321A3A-5654-44F7-B756-E3EA2CE31D3C">
+              <dmn:text>true</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_8D111F75-EC7B-46D7-8073-9608F782937D">
+              <dmn:text>true</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_3CECEBFB-B2ED-4A3A-8B89-BCCFC77D4E86">
+              <dmn:text>true</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_018A4953-0250-4E69-B824-A212C86342B5">
+              <dmn:text>true</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_44A09207-2804-41B9-AAAA-BB3C0AAFAB9A">
+              <dmn:text>true</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_D51A19B0-965A-4D3F-8658-0FB8219B40AE">
+              <dmn:text>true</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_C1A321ED-CA29-466B-AB9C-03FA0A05CA3E">
+              <dmn:text>"Candidate eligible for ICE"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_2912C1EA-8025-4627-8942-631228932BFB">
+            <dmn:inputEntry id="_2349A60E-A684-48C5-A368-8ABC4F73B55B">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_77AED01E-111B-4215-BFCC-2554945D0E7E">
+              <dmn:text>false</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_BAA9C22C-212D-4974-A356-5297A878D50F">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_6767677D-7E27-43BE-A7AD-56E0C9683A2C">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_9678FA02-0372-4F80-A85C-011EECA112D4">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_C47451C5-AC2A-4AF3-8916-EE58BB3696BA">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_C4CC5DBE-41F0-42A0-A3C5-E00EBD0F9CBC">
+              <dmn:text>"no group 1"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_BD8C89F5-E5B9-4076-BAA4-59B567553795">
+            <dmn:inputEntry id="_817D30AC-E96E-457F-8658-6E5FC7160DF9">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_26D91704-EA96-4979-954B-6479B821B5AF">
+              <dmn:text>"only 1 G1 passing grade"</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_84A553A3-AC52-4374-B195-A939F515231C">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_CDDCCFA9-604B-4F68-977C-CF0368E03EF2">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_1F467FF5-D618-4A89-A636-E0619651F609">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_B5AD4006-0419-41F6-AC52-6D6E39DD9880">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_F64178F3-0FB0-401C-ADC3-7B8DB9D7DE21">
+              <dmn:text>"only 1 G1 passing grade"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_7266B771-1ADF-4E30-B50B-783D8B04B7A3">
+            <dmn:inputEntry id="_7E74AF97-AF2D-468B-9635-FB50592EC0FE">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_F1FD668F-2D94-4655-892C-9E7F67FDFACC">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_5505E434-9768-4D52-9FB2-5F189D28DC2E">
+              <dmn:text>false</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_BB0CD3C3-3814-48F4-AA42-B699DC8B81B6">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_C73474CC-30FB-4F4F-A1CB-33B8739CA4D0">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_0F791DEA-A375-44E9-8D8E-8F2F0DB43703">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_250268D1-820A-4909-9453-5E2A254E98BD">
+              <dmn:text>"no group 2"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_F3229B57-F9D6-45C4-B957-6807A12F69C8">
+            <dmn:inputEntry id="_34FA5AF1-5341-4321-BBEE-02C2B70A72CA">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_796E6293-318E-4A53-AAF8-C28597F01B81">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_DA81F757-CE97-4800-94DC-38034D116A83">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_DEC9753D-2936-43B4-9801-AE5B86BDA30D">
+              <dmn:text>false</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_07CB527E-9896-4FFD-80D3-0BFFDD6CCFFD">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_C6C4BA82-DDA0-4BAE-9229-DC1816C4843B">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_B01EF189-90DC-4FDC-AEEF-3860547152E8">
+              <dmn:text>"no group 3"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_5C8E071C-CB37-4A36-BB15-CAECF7CDE3B6">
+            <dmn:inputEntry id="_CF0DD93F-CBF9-45DA-AD64-6E11A37882C6">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_97FA99F4-82C0-485D-A773-F8E1D0AF8E34">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_E979C635-93B0-4E05-86BE-176F61E4B45F">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_DD561116-EDE0-466F-AADC-E66FAA46D548">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_DB61CA48-5A48-4C4F-A92C-6E525373BEBE">
+              <dmn:text>false</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_D0C23D34-DB17-4E12-8C22-B0AF0413106F">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_B0018B48-516B-48F6-A50A-F66686B0D162">
+              <dmn:text>"no group 4"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_B5B1C317-B52E-4D84-BA2C-5B677213449A">
+            <dmn:inputEntry id="_970B94AD-0BA1-481E-B27E-3CC06BCFF8EB">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_DE254847-B114-428C-8D5B-BCFC886E06F1">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_66D2F120-CD86-4E12-B6A3-A7C4872BFEA7">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_59B28836-005E-478C-9EF0-F8D3261F5E86">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_0C1771F9-23A2-4D70-A2F6-9E6C76D378FC">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_112932A4-A51A-4680-AB55-2FEF1E5F78DE">
+              <dmn:text>false</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_2B7C7A41-2BC1-4CB4-86E3-7681E3100A19">
+              <dmn:text>"no group 5"</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+          <dmn:rule id="_9080AF41-35A5-4BA9-86D4-D66C822D88BC">
+            <dmn:inputEntry id="_030411E0-FCFF-4768-8F27-16DA6BE3EDEE">
+              <dmn:text>false</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_B41D403B-AF26-468B-A46F-507AB3339364">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_AB36578A-818C-4FFE-8E74-3C6AFFB497EB">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_A792AEE9-1819-42B2-BC13-DD66104B0EF5">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_C3050657-A6D5-4BA3-A7F2-8E39A53F1DA6">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:inputEntry id="_B6D19B04-7B64-4C0C-98DB-4F0D01A8DEF0">
+              <dmn:text>-</dmn:text>
+            </dmn:inputEntry>
+            <dmn:outputEntry id="_4DF499DD-DD71-44C1-9BD1-35672C4F3BA0">
+              <dmn:text>Credit Count.Reason</dmn:text>
+            </dmn:outputEntry>
+            <dmn:annotationEntry>
+              <dmn:text/>
+            </dmn:annotationEntry>
+          </dmn:rule>
+        </dmn:decisionTable>
+      </dmn:contextEntry>
+      <dmn:contextEntry>
+        <dmn:literalExpression id="_72AA3ACB-13F2-4822-B9B9-2BAC332902A6">
+          <dmn:text>if ICE Eligibility Response = "Candidate eligible for ICE" then ICE Eligibility Response else "Not eligible for ICE - " + string(ICE Eligibility Response)</dmn:text>
+        </dmn:literalExpression>
+      </dmn:contextEntry>
+    </dmn:context>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_1A0F3421-5EC5-454C-94BA-D26E98F54D3A" name="Assign Best Outcome">
+    <dmn:extensionElements/>
+    <dmn:variable id="_92FB0592-2DF0-4EDA-B130-5ABC5D208C3E" name="Assign Best Outcome" typeRef="Any"/>
+    <dmn:encapsulatedLogic id="_5A9F7EB1-DFD9-4202-875F-9D8BAD07F659" kind="FEEL">
+      <dmn:formalParameter id="_E06A53B3-3655-4438-97EE-CCB933BF84A9" name="Input" typeRef="ICE Candidate Data"/>
+      <dmn:formalParameter id="_F00A9D3A-FE4A-4F5C-A2DB-51194BDDECA2" name="Selected Syllabus List" typeRef="List Candidate Input"/>
+      <dmn:context id="_E9CCC242-D37C-4D09-ADD1-0434794CDB15">
+        <dmn:contextEntry>
+          <dmn:variable id="_AA8CCEA4-07D3-4678-93F8-993761626BA0" name="data" typeRef="Any"/>
+          <dmn:literalExpression id="_E83197D8-1F25-43D5-9275-AEE0E57C5DE0">
+            <dmn:text>dataModel()</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_47442921-878C-4FF6-94FC-6A38E6784746" name="Credit Cap" typeRef="number"/>
+          <dmn:literalExpression id="_37A1CB3B-9379-4EF8-9E16-E55EB7D06676">
+            <dmn:text>7</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_578E9F7A-F04C-4A30-9C3A-C2B7EA048536" name="Sorted OL" typeRef="ICE Candidate Data"/>
+          <dmn:context id="_D8ED0C36-476A-4162-B245-D766CEE5E0AC">
+            <dmn:contextEntry>
+              <dmn:variable id="_4B27FA65-A283-4087-B73D-A9130E9AC2FA" name="OLSyllCodes" typeRef="List String"/>
+              <dmn:literalExpression id="_A0F867C2-D41C-4084-ACF0-A2107BBFED45">
+                <dmn:description>Checks combo for any syll that match g2 </dmn:description>
+                <dmn:text>for x in data.OLevel return if list contains(Input, x) then null else x </dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:variable id="_458D678C-ECC9-40FF-A864-92FA9355464A" name="OLlist" typeRef="List Candidate Input"/>
+              <dmn:literalExpression id="_6CCA4137-1E93-4D76-AE77-1744C664C60B">
+                <dmn:text>Input[list contains(OLSyllCodes[item != null],SYLL_CODE )]</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:literalExpression id="_4BA97F9D-A648-40CA-ACDC-565C9566509F">
+                <dmn:text>sort(OLlist, function (x,y) Grade order(x.SYLL_GRADE) &lt; Grade order(y.SYLL_GRADE))</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+          </dmn:context>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_68992FB5-536C-4EE5-AC1B-7C2E8B34A8D7" name="Sorted IGCSE" typeRef="List String"/>
+          <dmn:context id="_02E5D6E1-8C8D-4DEA-8510-7AE0E855B19E">
+            <dmn:contextEntry>
+              <dmn:variable id="_2E496724-5DF4-46DC-BBCE-6AFED793C9BF" name="IGCSESyllCodes" typeRef="List String"/>
+              <dmn:literalExpression id="_A3F0B05E-2B5F-4369-91E6-611826DC5D4B">
+                <dmn:description>Checks combo for any syll that match g2 </dmn:description>
+                <dmn:text>for x in data.IGCSE return if list contains(Input, x) then null else x </dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:variable id="_EA9A91FD-C7D5-4912-83F9-ED6EEDD37CAB" name="IGCSElist" typeRef="ICE Candidate Data"/>
+              <dmn:literalExpression id="_00684F00-1B64-43A6-8DC7-A2F95B3EE476">
+                <dmn:text>Input[list contains(IGCSESyllCodes[item != null],SYLL_CODE )]</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+            <dmn:contextEntry>
+              <dmn:literalExpression id="_742BC53F-3B39-48F5-9641-7DC9381A9A6F">
+                <dmn:text>sort(IGCSElist, function(x,y) Grade order(x.SYLL_GRADE) &lt; Grade order(y.SYLL_GRADE))</dmn:text>
+              </dmn:literalExpression>
+            </dmn:contextEntry>
+          </dmn:context>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_2B2DF6DA-96C4-4B5B-A3BC-767AB302649E" name="Top OL Rank" typeRef="number"/>
+          <dmn:literalExpression id="_83BBD99B-F667-4C3B-81A5-04134895F6D4">
+            <dmn:text> index of(data.gradesList,Sorted OL[1].SYLL_GRADE)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_86A360FF-322D-483C-AD66-E7318064366F" name="Top IGCSE Rank" typeRef="number"/>
+          <dmn:literalExpression id="_19F4EFBB-98DE-4DA7-A018-FE3AB06A959B">
+            <dmn:text> index of(data.gradesList,Sorted IGCSE[1].SYLL_GRADE)</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_7F5440FF-0A8F-4CF7-8C1D-7876FCF7A652" name="Updated Candidate Input" typeRef="List Candidate Input"/>
+          <dmn:literalExpression id="_7C5CBD3A-77A4-4C8F-BB4E-7010EE55A991">
+            <dmn:text>if count(Selected Syllabus List[item in data.OLevel]) = 1 then remove(Input,index of(Input,Sorted IGCSE[1])) else if Top OL Rank &lt; Top IGCSE Rank then remove(Input,index of(Input,Sorted OL[1])) else remove(Input,index of(Input,Sorted IGCSE[1]))</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_0C5086CF-855C-4EF3-BD60-682DF35056DD" name="Best outcome" typeRef="List Candidate Input"/>
+          <dmn:literalExpression id="_1E94ED2D-9951-4701-A945-755B587E5DD6">
+            <dmn:text>data.OLevel[item in Input]</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_B2D0F5D4-58CF-486A-80A5-3FF400609F96" name="remaining OL in input" typeRef="number"/>
+          <dmn:literalExpression id="_C5ADE649-7908-4156-B770-98A225F89878">
+            <dmn:text>count(Updated Candidate Input[item in Sorted OL])</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_E68D309B-6B64-4F29-82BF-ECE8E532E9FA" name="remaining IGCSE in input" typeRef="number"/>
+          <dmn:literalExpression id="_00131D20-A30A-4275-A9FF-4266DC0BA49B">
+            <dmn:text>count(Updated Candidate Input[item in Sorted IGCSE])</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:literalExpression id="_901B7BB7-388A-453E-846E-FDE13B084696">
+            <dmn:text>Best outcome</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+    <dmn:knowledgeRequirement id="_C5937376-E901-4D19-9F20-2FF69D8897BF">
+      <dmn:requiredKnowledge href="#_9F6D2F8C-BC96-4037-A4DF-EE6E11AD83C7"/>
+    </dmn:knowledgeRequirement>
+    <dmn:knowledgeRequirement id="_3731BE7F-F070-4ECA-A294-4E076A118149">
+      <dmn:requiredKnowledge href="#_AB766954-F728-4D23-B91A-90D8FBE62B50"/>
+    </dmn:knowledgeRequirement>
+  </dmn:businessKnowledgeModel>
+  <dmn:businessKnowledgeModel id="_9F6D2F8C-BC96-4037-A4DF-EE6E11AD83C7" name="Grade order">
+    <dmn:extensionElements/>
+    <dmn:variable id="_582B571B-BB05-4FBF-B9D1-D1766FBDABF0" name="Grade order"/>
+    <dmn:encapsulatedLogic id="_4AFCDFBF-DB39-4964-87D7-A09E123BE397" kind="FEEL">
+      <dmn:formalParameter id="_92274A56-4A7D-49AD-BF2A-A067875F31FD" name="grade" typeRef="Grade Set IGCSE"/>
+      <dmn:literalExpression id="_94B4F4C1-43EF-49D5-90EE-6AF42AF83AB7">
+        <dmn:text>    if grade = "A*" then 1
+    else if grade = "A*A*" then 2
+    else if grade = "AA" then 3
+    else if grade = "A" then 4
+    else if grade = "BB" then 5
+    else if grade = "B" then 6
+    else if grade = "CC" then 7
+    else if grade = "C" then 8
+    else if grade = "DD" then 9
+    else if grade = "D" then 10
+    else if grade = "EE" then 11
+    else if grade = "E" then 12
+    else if grade = "FF" then 13
+    else if grade = "F" then 14
+    else if grade = "GG" then 15
+    else if grade = "G" then 16
+    else 17</dmn:text>
+      </dmn:literalExpression>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_F8607BD4-52E2-44A3-9458-CA7454DCBF30" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_807A9037-3D22-4966-9D32-0546725EB248">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>986</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E2613787-6156-424C-82D9-23C80B8EB5CB">
+            <kie:width>986</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E6973628-C01F-46A1-8158-28579CF241B0">
+            <kie:width>986</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_109A2EC6-BDD6-46B6-AFC4-9EFFEDB7F55D">
+            <kie:width>986</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_EEC9C7FE-A3B9-4617-9D3D-EE6083FD0647">
+            <kie:width>986</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_19E6C070-22FB-40A3-A0F4-6C002F00524E">
+            <kie:width>50</kie:width>
+            <kie:width>214</kie:width>
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_DFB4071E-2F30-4C97-AEE4-A4DF2DC00D62">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_17353A0B-BB1B-4E87-A4EC-2926818C55BD">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_81714E46-473B-41EF-AFD6-F9F9281E14D6">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_02E3D082-E86C-4EE0-B545-1627BDDC1999">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_76422C93-9564-4618-92D0-56EB7F63747A">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_942D2D6E-C7C9-42E2-8A3D-C45B2F897492">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_541D774E-B42C-4FB3-8274-F7B0B68FDB13">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_EC8EF68C-31F1-4EC0-89D9-DAAF1F9D6329">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_DE892D49-1291-4FA3-8E3C-82ECCC341D75">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_CC90C112-35AE-459F-841E-6CDA4B0F9FFC">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5A462808-4724-4102-A6FA-02CC98B21C17">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E5972440-C658-4CFC-9DE1-ED18C1910AC9">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_974A578E-9DA5-4FD8-8BF9-01B2A12EF34B">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_DF417595-BB26-40E8-AE65-481C1972519D">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0975FE5A-5EB7-430A-A582-3ED81B6326AB">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D21A5810-3C47-4C2C-800A-B3CC69CE8C90">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7F31961A-8B81-4569-B76E-5340604EF658">
+            <kie:width>1462</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7C841F77-CC56-4B34-A41F-712780B4CD4F">
+            <kie:width>50</kie:width>
+            <kie:width>1746</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_42F87466-2F67-4BCD-BF32-9D1B82A1032E">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1421</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_FA53EE4F-0EF0-4E24-A0B4-22B04DB02F9A">
+            <kie:width>1421</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_40DE83BD-1FD6-49FA-AEC8-610714D43BD0">
+            <kie:width>1421</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_EEB0AA0B-A1AB-492F-BE64-E68077184404">
+            <kie:width>50</kie:width>
+            <kie:width>279</kie:width>
+            <kie:width>1072</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B1CE66BB-F2D1-4FA7-A5A8-D0D1634283D9">
+            <kie:width>1072</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B5FACB36-6C76-4BD6-866D-3F95D2DD0DB4">
+            <kie:width>1072</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_130A3C1A-E61B-4D15-8733-F18FCA04B5B8">
+            <kie:width>1072</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_321D1D31-0D21-42D3-BBA5-E2C2F936C26B">
+            <kie:width>1072</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_DBF41522-61DF-42DE-8661-CCC753709F7E">
+            <kie:width>1072</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_BFA36313-98C7-4E97-B59E-E233FFCC975D">
+            <kie:width>1072</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B3109E21-F79C-4F18-8C9A-3F15DEDEB15C">
+            <kie:width>1072</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_1A3EDDDE-3271-4C4D-82C9-AB014C86BA12">
+            <kie:width>1421</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6C9DF3B7-B9FF-41CD-893E-FE142405801E">
+            <kie:width>1421</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_22BC17F5-03F7-4A48-88AE-833ED9953A59">
+            <kie:width>1421</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0A152DF3-A72F-4FC3-B6B7-D713988CFE8B">
+            <kie:width>1421</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_DFEE2382-8469-4BE8-BE0C-0E1A9F3F4829">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1231</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_1CE8D94E-505F-4C55-A9AB-2CE7D0CA99A1">
+            <kie:width>1231</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_4F644951-3DD9-4579-91DB-486F5315827D">
+            <kie:width>1231</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_DE65A6A9-F923-4BC1-A434-6BC46FDE9D83">
+            <kie:width>1231</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_AD318B1E-8859-40AD-9D60-AB78D7817E30">
+            <kie:width>1231</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E41B2FEC-6326-4090-95F7-989B8C8852C7">
+            <kie:width>1421</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E1273B16-C383-4A0F-916D-028E7364606A">
+            <kie:width>50</kie:width>
+            <kie:width>1611</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_83505918-E931-4F6A-B93A-964FA5E60413">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1226</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D6ACAAEF-6A55-43DC-93EF-39A888343ABE">
+            <kie:width>1226</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C405C4AA-AB3F-4690-94AA-A08FDD531D25">
+            <kie:width>1226</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D07DAB12-42ED-41E7-85A5-217D0059A4AC">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1036</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C1E72BA5-E495-4EB3-AD8A-3FB0E876BCD2">
+            <kie:width>1036</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3C989681-6D29-45AA-AA98-08D1099EDA8B">
+            <kie:width>1036</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_208764FC-00AC-48D9-A6AE-3C37C1287CEC">
+            <kie:width>1036</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0F8A6190-B700-44A3-885A-6E983149B73D">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1036</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D0227DBC-77F0-43F1-84D7-5196488F046C">
+            <kie:width>1036</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_FD0CEBC6-8A4F-4A90-B649-2037834E0E61">
+            <kie:width>1036</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_968FF4B5-F493-4968-B9D8-5B074C50DFFF">
+            <kie:width>1036</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_8AF339BF-6CFC-45EE-B5B4-DCB322D49B27">
+            <kie:width>1036</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_36D9DB22-9408-42FF-B47A-9B6D5DA9AD6B">
+            <kie:width>50</kie:width>
+            <kie:width>303</kie:width>
+            <kie:width>150</kie:width>
+            <kie:width>148</kie:width>
+            <kie:width>273</kie:width>
+            <kie:width>282</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F938F9C9-9F66-4E57-BE6E-D52BEC729BFE">
+            <kie:width>1226</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0304F0AC-88E7-48A3-B6EA-45CB41628FCD">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1185</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6E45F325-3D89-4C4B-B796-4DE303DB5662">
+            <kie:width>1185</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3CAEE0FA-8634-4ABA-84DC-A2B7E1D6357C">
+            <kie:width>1185</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_2C9172A5-A8A5-4224-B34F-29D1A787638E">
+            <kie:width>1185</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_9F5679D1-DE01-48A8-B0F1-09D15A534880">
+            <kie:width>1185</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F2C2C90B-C489-434F-85D7-180DCBA60252">
+            <kie:width>1185</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_961EE565-5C61-49FC-9DCF-5BCD24F2AA38">
+            <kie:width>50</kie:width>
+            <kie:width>126</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>125</kie:width>
+            <kie:width>286</kie:width>
+            <kie:width>253</kie:width>
+            <kie:width>225</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3CEF6C1A-EDCB-4B12-A1DD-8254D4431A04">
+            <kie:width>1185</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_06B23646-B3B0-4738-8A12-132DF7D52A11">
+            <kie:width>50</kie:width>
+            <kie:width>232</kie:width>
+            <kie:width>1912</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_01B437F1-42B5-498B-A14A-71D9B2F42F5B">
+            <kie:width>1912</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7B858F57-212B-4BFB-B4CA-0FBC4EA41F26">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E790514E-A697-44FA-B829-4EB9EB57B8E0">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D2C91970-AAC9-43A8-9D30-2A987C5870F6">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_78A4D6ED-BA9D-4FF3-ACFC-2EBFBCF37D17">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_55506C4B-CCF4-415D-ABDD-E5C268075273">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_BFE3F6E5-ABAF-461B-BBA3-31C5BB382334">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B37A441A-918F-4667-8D10-A5CC5829A561">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_462E22C1-D175-4C3B-AC33-ECB8FD35F4EA">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_FD6C0678-235F-4D1D-BBF9-F700311281E9">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_66B75BB0-D085-4C0F-9BAD-6FE6A8885D50">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B55DFFD5-35FF-4067-A36C-8B258EC7AC9F">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3C9A5D1D-A711-4094-9E78-DC096CA6C98B">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_BDCB36CD-456A-403E-BC61-FDA9549F9852">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C75FE74F-2C95-411D-B839-9A041ABFA6CE">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E22AB75E-5D2F-4F9B-9AAC-E3F296E14CDE">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7003A585-5D27-4113-914D-A9F63FBB5051">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5937E909-36EF-4B9C-872A-F6707424620D">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_DF72E73A-0F3C-4419-BEDB-B1471150B131">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_647ED188-AAE9-4C8D-8160-41FAFFAB43F4">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7589829B-7CEB-47FD-B688-EB1646E28527">
+            <kie:width>1722</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_8540797D-EAE6-4E33-9726-078580DDC51B">
+            <kie:width>1912</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_4817474F-A9E0-4B9A-9828-00D6DCA265A4">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>2576</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D20366AC-45AA-4484-9753-7F99C736C697">
+            <kie:width>2576</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E296DBF2-BB28-4676-8F1F-AEA802628712">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>2386</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_965B8B34-DBF7-4909-852D-536FC36E0D4D">
+            <kie:width>2386</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_4780B964-864A-4C26-AD88-EE2325C1D03B">
+            <kie:width>2386</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_CA1E5C1B-39B1-4591-9FCE-FBE663280445">
+            <kie:width>2386</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F750D13A-3A09-47AB-8E45-4E0273EE2E4A">
+            <kie:width>50</kie:width>
+            <kie:width>210</kie:width>
+            <kie:width>202</kie:width>
+            <kie:width>571</kie:width>
+            <kie:width>1333</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6C4D28D0-2254-4DB3-9C73-8787A7B9C300">
+            <kie:width>2386</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_8DC27ACC-68F8-43C3-A044-E92338E3EEDA">
+            <kie:width>50</kie:width>
+            <kie:width>233</kie:width>
+            <kie:width>2273</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_58B0A44E-D71E-429D-88D6-483CA969550D">
+            <kie:width>2273</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5AB8E778-8DE5-4EE3-BC7D-97E809B6C4AB">
+            <kie:width>2273</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_9786D1DE-F6D8-42DF-A282-32CC27426E4C">
+            <kie:width>2273</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0EBBEBA2-8EF9-4D3C-B519-42424040B314">
+            <kie:width>50</kie:width>
+            <kie:width>304</kie:width>
+            <kie:width>290</kie:width>
+            <kie:width>377</kie:width>
+            <kie:width>1232</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_8920B715-B866-4E06-B95C-E72B5E2C644E">
+            <kie:width>2273</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7B8C728D-C2B6-45DB-8E6C-3A6CDBCD92C9">
+            <kie:width>50</kie:width>
+            <kie:width>232</kie:width>
+            <kie:width>2274</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6AFB68AB-2BD1-4B2E-B2C0-7BE3F3C0A67B">
+            <kie:width>2274</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_68917BA0-6C0C-48C8-8387-9ECF10B4375A">
+            <kie:width>2274</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_3BBEFB59-7730-42F3-868D-D1E13F82AECE">
+            <kie:width>2274</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_1D1EFF90-341A-4F8A-9202-A23B398F60FB">
+            <kie:width>50</kie:width>
+            <kie:width>965</kie:width>
+            <kie:width>432</kie:width>
+            <kie:width>699</kie:width>
+            <kie:width>108</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D463A629-4E36-43FD-8AAF-5F5C7B41DAEB">
+            <kie:width>2274</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_DB7B0E68-26F1-4A72-AB5B-A468CA9977B3">
+            <kie:width>50</kie:width>
+            <kie:width>172</kie:width>
+            <kie:width>2334</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_FF059312-CAEA-4C8A-A892-8FC3D2D88E5D">
+            <kie:width>2334</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_2544D831-6BFF-4774-81EB-0E4C09330FBE">
+            <kie:width>2334</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_4BB94D13-2190-4CED-9C3E-9BCE116181D4">
+            <kie:width>2334</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_397FC8AC-20DD-4BDC-BB14-975EA85F1F95">
+            <kie:width>50</kie:width>
+            <kie:width>585</kie:width>
+            <kie:width>582</kie:width>
+            <kie:width>582</kie:width>
+            <kie:width>515</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_35F9F267-0207-4418-9BAC-7547FB51BC48">
+            <kie:width>2334</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0B8FD941-F5BC-4739-BB2A-5C0876BAEC35">
+            <kie:width>2576</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_2B0FB962-8E6C-43C5-82CB-0A1B824758B6">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>2386</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_971D7A60-CFC6-40AE-9D6A-3B7B720FBAF3">
+            <kie:width>2386</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_0E9E02CF-870E-474E-92A7-F009362AB874">
+            <kie:width>2386</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_95417563-FBE4-4818-B2A2-9BF5C65B63AE">
+            <kie:width>2386</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_B30B53B1-C6D2-4115-8C2F-6143A25A4EC2">
+            <kie:width>50</kie:width>
+            <kie:width>309</kie:width>
+            <kie:width>352</kie:width>
+            <kie:width>1555</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_FB5F043C-9302-405F-869E-6BCFEDA20804">
+            <kie:width>2386</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_F1DCC275-462E-4A4A-A5FD-0ADEFB1B86D7">
+            <kie:width>2576</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5D102B53-17E9-40FA-A7FE-70694F1DEACD">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>2851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_04F75B54-A566-447E-97F9-D508042733D1">
+            <kie:width>50</kie:width>
+            <kie:width>192</kie:width>
+            <kie:width>389</kie:width>
+            <kie:width>365</kie:width>
+            <kie:width>336</kie:width>
+            <kie:width>338</kie:width>
+            <kie:width>377</kie:width>
+            <kie:width>684</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_72AA3ACB-13F2-4822-B9B9-2BAC332902A6">
+            <kie:width>2851</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E9CCC242-D37C-4D09-ADD1-0434794CDB15">
+            <kie:width>50</kie:width>
+            <kie:width>186</kie:width>
+            <kie:width>1756</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_E83197D8-1F25-43D5-9275-AEE0E57C5DE0">
+            <kie:width>1756</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_37A1CB3B-9379-4EF8-9E16-E55EB7D06676">
+            <kie:width>1756</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D8ED0C36-476A-4162-B245-D766CEE5E0AC">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1566</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A0F867C2-D41C-4084-ACF0-A2107BBFED45">
+            <kie:width>1566</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_6CCA4137-1E93-4D76-AE77-1744C664C60B">
+            <kie:width>1566</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_4BA97F9D-A648-40CA-ACDC-565C9566509F">
+            <kie:width>1566</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_02E5D6E1-8C8D-4DEA-8510-7AE0E855B19E">
+            <kie:width>50</kie:width>
+            <kie:width>120</kie:width>
+            <kie:width>1566</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A3F0B05E-2B5F-4369-91E6-611826DC5D4B">
+            <kie:width>1566</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_00684F00-1B64-43A6-8DC7-A2F95B3EE476">
+            <kie:width>1566</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_742BC53F-3B39-48F5-9641-7DC9381A9A6F">
+            <kie:width>1566</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_83BBD99B-F667-4C3B-81A5-04134895F6D4">
+            <kie:width>1756</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_19F4EFBB-98DE-4DA7-A018-FE3AB06A959B">
+            <kie:width>1756</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_7C5CBD3A-77A4-4C8F-BB4E-7010EE55A991">
+            <kie:width>1756</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_1E94ED2D-9951-4701-A945-755B587E5DD6">
+            <kie:width>1756</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_C5ADE649-7908-4156-B770-98A225F89878">
+            <kie:width>1756</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_00131D20-A30A-4275-A9FF-4266DC0BA49B">
+            <kie:width>1756</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_901B7BB7-388A-453E-846E-FDE13B084696">
+            <kie:width>1756</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_5A9F7EB1-DFD9-4202-875F-9D8BAD07F659">
+            <kie:width>50</kie:width>
+            <kie:width>2012</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_94B4F4C1-43EF-49D5-90EE-6AF42AF83AB7">
+            <kie:width>741</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_4AFCDFBF-DB39-4964-87D7-A09E123BE397">
+            <kie:width>50</kie:width>
+            <kie:width>741</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_9E8077C5-7DAE-4218-AC8F-86BC09AC446C" dmnElementRef="_9E8077C5-7DAE-4218-AC8F-86BC09AC446C" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="542" y="471" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_67A3CD4D-F060-4648-BD05-2340D7824DC3" dmnElementRef="_67A3CD4D-F060-4648-BD05-2340D7824DC3" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="543" y="378" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_AB766954-F728-4D23-B91A-90D8FBE62B50" dmnElementRef="_AB766954-F728-4D23-B91A-90D8FBE62B50" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="295.5981308411215" y="232.34210526315792" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_080CC3DD-4243-49DE-8908-8A3F82AD5D89" dmnElementRef="_080CC3DD-4243-49DE-8908-8A3F82AD5D89" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="296" y="320" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_09ED9FD2-1CDD-44F6-B0AD-341729921BA8" dmnElementRef="_09ED9FD2-1CDD-44F6-B0AD-341729921BA8" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="751" y="204" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_2FDED9B7-B4BB-42EA-B32E-31E696760586" dmnElementRef="_2FDED9B7-B4BB-42EA-B32E-31E696760586" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="936" y="204" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_9D14247E-273A-422B-A84E-4D041D60D65D" dmnElementRef="_9D14247E-273A-422B-A84E-4D041D60D65D" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="542" y="226" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_E5CE517F-F6F9-41D2-96CA-5647971F4B3D" dmnElementRef="_E5CE517F-F6F9-41D2-96CA-5647971F4B3D" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="542" y="88" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_19DF01BC-6D18-443A-957F-491A06D28B30" dmnElementRef="_19DF01BC-6D18-443A-957F-491A06D28B30" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="542" y="11" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_1A0F3421-5EC5-454C-94BA-D26E98F54D3A" dmnElementRef="_1A0F3421-5EC5-454C-94BA-D26E98F54D3A" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="887" y="337.3421052631579" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_9F6D2F8C-BC96-4037-A4DF-EE6E11AD83C7" dmnElementRef="_9F6D2F8C-BC96-4037-A4DF-EE6E11AD83C7" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="1053" y="336.6666717529297" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_6AFEAF0A-A88C-44F9-80FF-E241E279921F-AUTO-SOURCE-AUTO-TARGET" dmnElementRef="_6AFEAF0A-A88C-44F9-80FF-E241E279921F">
+        <di:waypoint x="592" y="471"/>
+        <di:waypoint x="593" y="428"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_6B040255-E64F-46A4-AB81-8BA266974225" dmnElementRef="_6B040255-E64F-46A4-AB81-8BA266974225">
+        <di:waypoint x="345.5981308411215" y="257.3421052631579"/>
+        <di:waypoint x="543" y="403"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_0CF77038-612F-4031-B028-1A3623F4345C" dmnElementRef="_0CF77038-612F-4031-B028-1A3623F4345C">
+        <di:waypoint x="346" y="345"/>
+        <di:waypoint x="543" y="403"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_3032187D-DE17-4A8F-9778-CAC9D12B4C2F-AUTO-TARGET" dmnElementRef="_3032187D-DE17-4A8F-9778-CAC9D12B4C2F">
+        <di:waypoint x="345.5981308411215" y="257.3421052631579"/>
+        <di:waypoint x="346" y="320"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_9049905E-ACC4-4779-938A-677CE5443EAA-AUTO-TARGET" dmnElementRef="_9049905E-ACC4-4779-938A-677CE5443EAA">
+        <di:waypoint x="643" y="403"/>
+        <di:waypoint x="801" y="254"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_097DE8B2-E43B-48E2-A9C6-D6DF473F6E5E" dmnElementRef="_097DE8B2-E43B-48E2-A9C6-D6DF473F6E5E">
+        <di:waypoint x="345.5981308411215" y="257.3421052631579"/>
+        <di:waypoint x="596" y="242"/>
+        <di:waypoint x="801" y="254"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_7107D403-F80A-40FB-A449-790E8BB2D137-AUTO-TARGET" dmnElementRef="_7107D403-F80A-40FB-A449-790E8BB2D137">
+        <di:waypoint x="643" y="403"/>
+        <di:waypoint x="986" y="254"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_933E2DAF-5EAF-4453-ABC6-24B6E6E57F31" dmnElementRef="_933E2DAF-5EAF-4453-ABC6-24B6E6E57F31">
+        <di:waypoint x="593" y="378"/>
+        <di:waypoint x="592" y="251"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_70254C63-3C5F-4608-8D25-4BD6467985DF-AUTO-TARGET" dmnElementRef="_70254C63-3C5F-4608-8D25-4BD6467985DF">
+        <di:waypoint x="345.5981308411215" y="257.3421052631579"/>
+        <di:waypoint x="592" y="276"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_44EC3DDF-E5BD-4C7F-8549-5938FACA546B-AUTO-SOURCE-AUTO-TARGET" dmnElementRef="_44EC3DDF-E5BD-4C7F-8549-5938FACA546B">
+        <di:waypoint x="592" y="226"/>
+        <di:waypoint x="592" y="138"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_8A9B947E-A712-4607-9813-338910FF5683-AUTO-TARGET" dmnElementRef="_8A9B947E-A712-4607-9813-338910FF5683">
+        <di:waypoint x="593" y="378"/>
+        <di:waypoint x="592" y="138"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_F826ACDA-1AA3-4B7B-83A8-EFB9A18A274B" dmnElementRef="_F826ACDA-1AA3-4B7B-83A8-EFB9A18A274B">
+        <di:waypoint x="801" y="229"/>
+        <di:waypoint x="592" y="113"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_7BB2374E-CC37-4FDE-9076-D421146D6045-AUTO-TARGET" dmnElementRef="_7BB2374E-CC37-4FDE-9076-D421146D6045">
+        <di:waypoint x="345.5981308411215" y="257.3421052631579"/>
+        <di:waypoint x="592" y="138"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_0FF22799-30B8-402B-9261-60431FD1BF04-AUTO-SOURCE-AUTO-TARGET" dmnElementRef="_0FF22799-30B8-402B-9261-60431FD1BF04">
+        <di:waypoint x="592" y="88"/>
+        <di:waypoint x="592" y="61"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_A950648D-E1E6-4E8C-A8CE-0FB215BC7A07-AUTO-TARGET" dmnElementRef="_A950648D-E1E6-4E8C-A8CE-0FB215BC7A07">
+        <di:waypoint x="592" y="113"/>
+        <di:waypoint x="592" y="61"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_06F7DD7F-833F-459E-BBAB-5FA93D27B93F-AUTO-TARGET" dmnElementRef="_06F7DD7F-833F-459E-BBAB-5FA93D27B93F">
+        <di:waypoint x="801" y="229"/>
+        <di:waypoint x="756" y="153"/>
+        <di:waypoint x="592" y="61"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_C5937376-E901-4D19-9F20-2FF69D8897BF-AUTO-TARGET" dmnElementRef="_C5937376-E901-4D19-9F20-2FF69D8897BF">
+        <di:waypoint x="1103" y="361.6666717529297"/>
+        <di:waypoint x="987" y="362.3421052631579"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_3731BE7F-F070-4ECA-A294-4E076A118149" dmnElementRef="_3731BE7F-F070-4ECA-A294-4E076A118149">
+        <di:waypoint x="345.5981308411215" y="257.3421052631579"/>
+        <di:waypoint x="887" y="362.3421052631579"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
